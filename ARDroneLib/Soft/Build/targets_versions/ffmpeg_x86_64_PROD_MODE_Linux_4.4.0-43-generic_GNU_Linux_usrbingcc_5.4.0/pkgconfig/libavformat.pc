@@ -1,0 +1,14 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=/home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/ARDroneLib/FFMPEG/ffmpeg/../../Soft/Build/targets_versions//ffmpeg_x86_64_PROD_MODE_Linux_4.4.0-43-generic_GNU_Linux_usrbingcc_5.4.0
+includedir=/home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/ARDroneLib/FFMPEG/ffmpeg/../Includes
+
+Name: libavformat
+Description: FFmpeg container format library
+Version: 53.4.0
+Requires: 
+Requires.private: libavcodec = 53.7.0
+Conflicts:
+Libs: -L${libdir} -lavformat 
+Libs.private: -lSDL -lm -pthread -lz
+Cflags: -I${includedir}
