@@ -46,5 +46,5 @@ video_stage_tcp.o ../../Soft/Build/targets_versions/ardrone_lib_PROD_MODE_vlib_L
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/stdio2.h \
- /home/rafael/Desktop/Drone/ARDrone_SDK_2_0_1/Examples/Linux/Navigation/Build/../../../../ARDroneLib/Soft/Common/video_encapsulation.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/video_encapsulation.h \
  ../VP_Os/vp_os_assert.h

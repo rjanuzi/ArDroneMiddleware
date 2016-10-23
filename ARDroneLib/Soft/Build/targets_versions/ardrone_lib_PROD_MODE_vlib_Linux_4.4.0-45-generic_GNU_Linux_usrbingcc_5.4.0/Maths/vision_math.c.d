@@ -13,8 +13,8 @@ vision_math.o ../../Soft/Build/targets_versions/ardrone_lib_PROD_MODE_vlib_Linux
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/stdio2.h \
- /home/rafael/Desktop/Drone/ARDrone_SDK_2_0_1/Examples/Linux/Navigation/Build/../../../../ARDroneLib/Soft/Lib/Maths/vision_math.h \
- /home/rafael/Desktop/Drone/ARDrone_SDK_2_0_1/Examples/Linux/Navigation/Build/../../../../ARDroneLib/Soft/Lib/Maths/maths.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/Maths/vision_math.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/Maths/maths.h \
  ../VP_Os/vp_os_types.h ../VP_Os/vp_os.h ../VP_Os/vp_os_rtmon.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -32,4 +32,4 @@ vision_math.o ../../Soft/Build/targets_versions/ardrone_lib_PROD_MODE_vlib_Linux
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathinline.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/float.h \
- /home/rafael/Desktop/Drone/ARDrone_SDK_2_0_1/Examples/Linux/Navigation/Build/../../../../ARDroneLib/Soft/Lib/Maths/matrices.h
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/Maths/matrices.h

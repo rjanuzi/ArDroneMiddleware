@@ -114,7 +114,7 @@ GENERIC_TARGET_BINARIES_PREFIX=
 GENERIC_TARGET_BINARIES_DIR=$(ARDRONE_TARGET_DIR)
 
 GENERIC_BINARIES_SOURCE_ENTRYPOINTS+=			\
-	$(COMMON_MOB_SRC_PATH)/mobile_main.c
+	$(COMMON_MOB_SRC_PATH)/middleware_main.c
 
 GENERIC_INCLUDES:=$(addprefix -I,$(GENERIC_INCLUDES))
 
@@ -185,7 +185,7 @@ print_title:
 $(TARGET): 
 	@if [ '$(MAKECMDGOALS)' != 'clean' ]; then echo "$(GREEN_COLOR)-- Linking $(TARGET) --$(NO_COLOR)"; fi
 	@$(MAKE) -C $(SDK_PATH)/VP_SDK/Build $(TMP_SDK_FLAGS) $(SDK_FLAGS) $(MAKECMDGOALS)
-	mv $(GENERIC_TARGET_BINARIES_DIR)/$(COMMON_MOB_SRC_PATH)/mobile_main $(TARGET)
+	mv $(GENERIC_TARGET_BINARIES_DIR)/$(COMMON_MOB_SRC_PATH)/middleware_main $(TARGET)
 	mv $(TARGET) $(ARDRONE_TARGET_DIR)/
 	@if [ ! -e $(ARDRONE_TARGET_DIR)/ardrone.xml ]; then cp $(SRC_DIR)/xml_files/ardrone_default.xml $(ARDRONE_TARGET_DIR)/ardrone.xml; fi
 ifeq ($(USE_ARDRONE_VICON),yes)

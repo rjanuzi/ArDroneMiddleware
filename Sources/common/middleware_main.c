@@ -1,7 +1,7 @@
 /**
- * @file mobile_main.c
- * @author aurelien.morelle@parrot.com & sylvain.gaeremynck@parrot.com
- * @date 2006/05/01
+ * @file middleware_main.c
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 23/10/2016
  */
 
 #include <ATcodec/ATcodec_api.h>
@@ -95,12 +95,12 @@ void controlCHandler (int signal)
 
 int main(int argc, char** argv)
 {
-	printf("\n\n\n\n-------> Minha modificacao!!!!! UHUUUUUU");
-	printf("AR.Drone Navigation - build %s %s\n\n",__DATE__,__TIME__);
+	printf("AR.Drone Middleware - build %s %s\n\n",__DATE__,__TIME__);
 	gtk_init(&argc, &argv);
-    signal (SIGABRT, &controlCHandler);
-    signal (SIGTERM, &controlCHandler);
-    signal (SIGINT, &controlCHandler);
+    	signal (SIGABRT, &controlCHandler);
+    	signal (SIGTERM, &controlCHandler);
+    	signal (SIGINT, &controlCHandler);
+	
 	return ardrone_tool_main(argc, argv);
 }
 
@@ -324,4 +324,3 @@ THREAD_TABLE_ENTRY(vicon, 20)
 THREAD_TABLE_ENTRY(novadem, 20)
 #endif // USE_TABLE_PILOTAGE
 END_THREAD_TABLE
-

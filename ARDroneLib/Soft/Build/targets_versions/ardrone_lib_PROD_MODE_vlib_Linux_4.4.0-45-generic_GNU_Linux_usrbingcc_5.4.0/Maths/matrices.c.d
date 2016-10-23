@@ -39,8 +39,8 @@ matrices.o ../../Soft/Build/targets_versions/ardrone_lib_PROD_MODE_vlib_Linux_4.
  ..//VP_Os/linux/vp_os_serial.h /usr/include/termios.h \
  /usr/include/x86_64-linux-gnu/bits/termios.h \
  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h ../VP_Os/linux/intrin.h \
- /home/rafael/Desktop/Drone/ARDrone_SDK_2_0_1/Examples/Linux/Navigation/Build/../../../../ARDroneLib/Soft/Lib/Maths/matrices.h \
- /home/rafael/Desktop/Drone/ARDrone_SDK_2_0_1/Examples/Linux/Navigation/Build/../../../../ARDroneLib/Soft/Lib/Maths/maths.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/Maths/matrices.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/Maths/maths.h \
  /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
  /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
  /usr/include/x86_64-linux-gnu/bits/huge_val.h \
