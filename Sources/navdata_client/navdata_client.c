@@ -2,6 +2,7 @@
 #include <ardrone_tool/Control/ardrone_navdata_control.h>
 #include "navdata_client/navdata_client.h"
 #include "navdata_client/navdata_ihm.h"
+#include "navdata_client/navdata_middleware.h"
 #include "navdata_client/navdata_polaris.h"
 #include "navdata_client/navdata_tablepilotage.h"
 #include "ihm/ihm_vision.h"
@@ -9,6 +10,7 @@
 
 BEGIN_NAVDATA_HANDLER_TABLE
   NAVDATA_HANDLER_TABLE_ENTRY(navdata_ihm_init, navdata_ihm_process, navdata_ihm_release, NULL)
+  NAVDATA_HANDLER_TABLE_ENTRY(navdata_middleware_init, navdata_middleware_process, navdata_middleware_release, NULL)
 #ifdef ND_WRITE_TO_FILE
   NAVDATA_HANDLER_TABLE_ENTRY(ardrone_navdata_file_init, ardrone_navdata_file_process, ardrone_navdata_file_release, NULL)
 

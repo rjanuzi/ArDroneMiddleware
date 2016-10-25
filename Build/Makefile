@@ -50,6 +50,7 @@ GENERIC_BINARIES_COMMON_SOURCE_FILES+=			\
 	$(NDC_SRC_PATH)/navdata_client.c		\
 	$(NDC_SRC_PATH)/navdata_tablepilotage.c		\
 	$(NDC_SRC_PATH)/navdata_ihm.c			\
+	$(NDC_SRC_PATH)/navdata_middleware.c		\
 	$(IHM_SRC_PATH)/view_drone_attitude.c		\
 	$(IHM_SRC_PATH)/ihm_vision.c    		\
 	$(IHM_SRC_PATH)/ihm_stages_o_gtk.c    		\
