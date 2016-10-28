@@ -1,48 +1,6 @@
 navdata_middleware.o ../../Soft/Build/targets_versions/ardrone_middleware_PROD_MODE_vlib_Linux_4.4.0-45-generic_GNU_Linux_usrbingcc_5.4.0/navdata_client/navdata_middleware.c.d: \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../Sources/navdata_client/navdata_middleware.c \
- /usr/include/stdc-predef.h /usr/include/string.h /usr/include/features.h \
- /usr/include/x86_64-linux-gnu/sys/cdefs.h \
- /usr/include/x86_64-linux-gnu/bits/wordsize.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h /usr/include/xlocale.h \
- /usr/include/x86_64-linux-gnu/bits/string.h \
- /usr/include/x86_64-linux-gnu/bits/string2.h /usr/include/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/include/x86_64-linux-gnu/bits/byteswap-16.h /usr/include/stdlib.h \
- /usr/include/x86_64-linux-gnu/bits/string3.h ../VP_Os/vp_os_malloc.h \
- /usr/include/assert.h /usr/include/x86_64-linux-gnu/bits/waitflags.h \
- /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
- /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/time.h \
- /usr/include/x86_64-linux-gnu/sys/select.h \
- /usr/include/x86_64-linux-gnu/bits/select.h \
- /usr/include/x86_64-linux-gnu/bits/sigset.h \
- /usr/include/x86_64-linux-gnu/bits/time.h \
- /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
- /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h /usr/include/alloca.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h ../VP_Os/vp_os_types.h \
- ../VP_Os/vp_os.h ../VP_Os/vp_os_rtmon.h \
- /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
- ..//VP_Os/linux/vp_os_serial.h /usr/include/termios.h \
- /usr/include/x86_64-linux-gnu/bits/termios.h \
- /usr/include/x86_64-linux-gnu/sys/ttydefaults.h ../VP_Os/linux/intrin.h \
- ../VP_Os/vp_os_print.h /usr/include/stdio.h /usr/include/libio.h \
- /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h \
- /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
- /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
- /usr/include/x86_64-linux-gnu/bits/stdio.h \
- /usr/include/x86_64-linux-gnu/bits/stdio2.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/config.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/generated_custom.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../Sources/common/common.h \
+ /usr/include/stdc-predef.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../Sources/ihm/ihm.h \
  /usr/include/gtk-2.0/gtk/gtk.h /usr/include/gtk-2.0/gdk/gdk.h \
  /usr/include/gtk-2.0/gdk/gdkapplaunchcontext.h \
@@ -52,26 +10,38 @@ navdata_middleware.o ../../Soft/Build/targets_versions/ardrone_middleware_PROD_M
  /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
  /usr/lib/x86_64-linux-gnu/glib-2.0/include/glibconfig.h \
  /usr/include/glib-2.0/glib/gmacros.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stddef.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include-fixed/syslimits.h \
- /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+ /usr/include/limits.h /usr/include/features.h \
+ /usr/include/x86_64-linux-gnu/sys/cdefs.h \
+ /usr/include/x86_64-linux-gnu/bits/wordsize.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+ /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
  /usr/include/linux/limits.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
  /usr/lib/gcc/x86_64-linux-gnu/5/include/float.h \
- /usr/include/glib-2.0/glib/gversionmacros.h \
+ /usr/include/glib-2.0/glib/gversionmacros.h /usr/include/time.h \
+ /usr/include/x86_64-linux-gnu/bits/time.h \
+ /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h /usr/include/xlocale.h \
  /usr/include/glib-2.0/glib/garray.h \
  /usr/include/glib-2.0/glib/gasyncqueue.h \
  /usr/include/glib-2.0/glib/gthread.h \
  /usr/include/glib-2.0/glib/gatomic.h /usr/include/glib-2.0/glib/gerror.h \
+ /usr/lib/gcc/x86_64-linux-gnu/5/include/stdarg.h \
  /usr/include/glib-2.0/glib/gquark.h /usr/include/glib-2.0/glib/gutils.h \
  /usr/include/glib-2.0/glib/gbacktrace.h /usr/include/signal.h \
+ /usr/include/x86_64-linux-gnu/bits/sigset.h \
  /usr/include/x86_64-linux-gnu/bits/signum.h \
  /usr/include/x86_64-linux-gnu/bits/siginfo.h \
  /usr/include/x86_64-linux-gnu/bits/sigaction.h \
  /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
  /usr/include/x86_64-linux-gnu/bits/sigthread.h \
  /usr/include/glib-2.0/glib/gbase64.h \
  /usr/include/glib-2.0/glib/gbitlock.h \
@@ -125,7 +95,15 @@ navdata_middleware.o ../../Soft/Build/targets_versions/ardrone_middleware_PROD_M
  /usr/include/glib-2.0/glib/deprecated/gcompletion.h \
  /usr/include/glib-2.0/glib/deprecated/gmain.h \
  /usr/include/glib-2.0/glib/deprecated/grel.h \
- /usr/include/glib-2.0/glib/deprecated/gthread.h /usr/include/pthread.h \
+ /usr/include/glib-2.0/glib/deprecated/gthread.h \
+ /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/endian.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
+ /usr/include/x86_64-linux-gnu/sys/select.h \
+ /usr/include/x86_64-linux-gnu/bits/select.h \
+ /usr/include/x86_64-linux-gnu/bits/select2.h \
+ /usr/include/x86_64-linux-gnu/sys/sysmacros.h /usr/include/pthread.h \
  /usr/include/sched.h /usr/include/x86_64-linux-gnu/bits/sched.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
  /usr/include/glib-2.0/glib/glib-autocleanups.h \
@@ -318,7 +296,12 @@ navdata_middleware.o ../../Soft/Build/targets_versions/ardrone_middleware_PROD_M
  /usr/include/pango-1.0/pango/pango-layout.h \
  /usr/include/pango-1.0/pango/pango-tabs.h \
  /usr/include/pango-1.0/pango/pango-renderer.h \
- /usr/include/pango-1.0/pango/pango-utils.h \
+ /usr/include/pango-1.0/pango/pango-utils.h /usr/include/stdio.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio.h \
+ /usr/include/x86_64-linux-gnu/bits/stdio2.h \
  /usr/lib/x86_64-linux-gnu/gtk-2.0/include/gdkconfig.h \
  /usr/include/gtk-2.0/gdk/gdkdisplay.h \
  /usr/include/gtk-2.0/gdk/gdkevents.h /usr/include/gtk-2.0/gdk/gdkcolor.h \
@@ -580,11 +563,28 @@ navdata_middleware.o ../../Soft/Build/targets_versions/ardrone_middleware_PROD_M
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/ardrone_api.h \
  /usr/include/x86_64-linux-gnu/sys/time.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/ardrone_common_config.h \
- ../ATcodec/ATcodec_api.h ../VP_Os/vp_os_thread.h \
- ..//VP_Os/linux/vp_os_thread_dep.h ../ATcodec/ATcodec.h \
- ../ATcodec/ATcodec_Memory.h ../ATcodec/ATcodec_Error.h \
- ../ATcodec/ATcodec_Tree.h ../ATcodec/ATcodec_Buffer.h \
+ ../ATcodec/ATcodec_api.h ../VP_Os/vp_os_types.h ../VP_Os/vp_os.h \
+ ../VP_Os/vp_os_rtmon.h /usr/lib/gcc/x86_64-linux-gnu/5/include/stdint.h \
+ /usr/include/stdint.h /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ ..//VP_Os/linux/vp_os_serial.h /usr/include/termios.h \
+ /usr/include/x86_64-linux-gnu/bits/termios.h \
+ /usr/include/x86_64-linux-gnu/sys/ttydefaults.h ../VP_Os/linux/intrin.h \
+ ../VP_Os/vp_os_thread.h ..//VP_Os/linux/vp_os_thread_dep.h \
+ ../ATcodec/ATcodec.h ../ATcodec/ATcodec_Memory.h \
+ ../ATcodec/ATcodec_Error.h ../ATcodec/ATcodec_Tree.h \
+ ../ATcodec/ATcodec_Buffer.h ../VP_Os/vp_os_malloc.h \
+ /usr/include/assert.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/string.h \
+ /usr/include/x86_64-linux-gnu/bits/string2.h /usr/include/stdlib.h \
+ /usr/include/x86_64-linux-gnu/bits/string3.h \
+ /usr/include/x86_64-linux-gnu/bits/waitflags.h \
+ /usr/include/x86_64-linux-gnu/bits/waitstatus.h /usr/include/alloca.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/navdata_common.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/config.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/generated_custom.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/vision_common.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/Maths/maths.h \
  /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/math-vector.h \
@@ -627,33 +627,6 @@ navdata_middleware.o ../../Soft/Build/targets_versions/ardrone_middleware_PROD_M
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Control/ardrone_control_configuration.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/iniparser3.0b/src/iniparser.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/iniparser3.0b/src/dictionary.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../Sources/ihm/ihm_vision.h \
- /usr/include/gtk-2.0/gtk/gtk.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Navdata/ardrone_navdata_client.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Control/ardrone_navdata_control.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Navdata/ardrone_navdata_file.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Navdata/ardrone_general_navdata.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Navdata/ardrone_academy_navdata.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Video/video_navdata_handler.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../Sources/ihm/ihm_stages_o_gtk.h \
- ../VP_Api/vp_api.h ../VP_Api/vp_api_config.h ../VP_Api/vp_api_stage.h \
- ../VP_Api/vp_api_supervisor.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Video/video_stage_decoder.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Video/video_stage_ffmpeg_decoder.h \
- ../../FFMPEG/Includes/libavcodec/avcodec.h \
- ../../FFMPEG/Includes/libavutil/samplefmt.h \
- ../../FFMPEG/Includes/libavutil/cpu.h \
- ../../FFMPEG/Includes/libavcodec/version.h \
- ../../FFMPEG/Includes/libavutil/audioconvert.h \
- ../../FFMPEG/Includes/libavformat/avformat.h \
- ../../FFMPEG/Includes/libavutil/dict.h \
- ../../FFMPEG/Includes/libavformat/avio.h \
- ../../FFMPEG/Includes/libavutil/common.h \
- ../../FFMPEG/Includes/libavutil/log.h \
- ../../FFMPEG/Includes/libavformat/version.h \
- ../../FFMPEG/Includes/libswscale/swscale.h \
- ../../VLIB/../VLIB/Stages/vlib_stage_decode.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../Sources/ihm/view_drone_attitude.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../Sources/navdata_client/navdata_middleware.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../Sources/common/mobile_config.h \
  /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
@@ -721,4 +694,9 @@ navdata_middleware.o ../../Soft/Build/targets_versions/ardrone_middleware_PROD_M
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/UI/ardrone_input.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/ardrone_tool.h \
  /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/academy_common.h \
- /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Common/control_states.h
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Navdata/ardrone_navdata_client.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Control/ardrone_navdata_control.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Navdata/ardrone_navdata_file.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Navdata/ardrone_general_navdata.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Navdata/ardrone_academy_navdata.h \
+ /home/rafael/Desktop/SigTracCodes/ArDroneMiddleware/Build/../ARDroneLib/Soft/Lib/ardrone_tool/Video/video_navdata_handler.h
