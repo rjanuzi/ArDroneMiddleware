@@ -10,10 +10,13 @@
 /* Utilitarias */
 #include <util_udp.h>
 
+/* HTTP Server */
+#include <httpServer.h>
+#include "droneAtCommands.h"
+
 /* Drone Libs */
-#include <arDroneTMs.h>
-#include <arDroneTCs.h>
-#include <atCommands.h>
+#include "droneTCs.h"
+#include "droneTMs.h"
 
 
 #endif /* MAIN_H_ */

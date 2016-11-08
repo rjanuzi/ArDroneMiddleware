@@ -5,8 +5,8 @@
  *      Author: rafael
  */
 
-#ifndef ATCOMMANDS_H_
-#define ATCOMMANDS_H_
+#ifndef DRONEATCOMMANDS_H_
+#define DRONEATCOMMANDS_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,4 +21,4 @@
 #define ATCMD_AT_REF_LAND_FLAG		 0b00000000000000000000000000000000
 #define ATCMD_AT_REF_EMERGENCY_ORDER 0b00000000000000000000000100000000
 
-#endif /* ATCOMMANDS_H_ */
+#endif /* DRONEATCOMMANDS_H_ */

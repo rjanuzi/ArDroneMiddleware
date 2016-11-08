@@ -1,5 +1,5 @@
-#ifndef ARDRONEDEFINES_H_
-#define ARDRONEDEFINES_H_
+#ifndef DRONEDEFINES_H_
+#define DRONEDEFINES_H_
 
 /* Drone specifc connection defines */
 #define DRONE_IP                	"192.168.1.1"
@@ -8,4 +8,4 @@
 #define DRONE_ATCMD_PORT        	5556
 #define DRONE_CONTROL_PORT			5559
 
-#endif /* ARDRONEDEFINES_H_ */
+#endif /* DRONEDEFINES_H_ */

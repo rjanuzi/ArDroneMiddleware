@@ -1,5 +1,5 @@
-#ifndef ARDRONETCS_H_
-#define ARDRONETCS_H_
+#ifndef DRONETMS_H_
+#define DRONETMS_H_
 
 /* Bibliotecas basicas */
 #include <stdio.h>
@@ -22,15 +22,15 @@
 #include <errno.h>
 
 /* Drone */
-#include <arDroneDefines.h>
+#include "droneDefines.h"
 
 /* General defines */
-#define arDroneTcs_VERBOSE       1
+#define droneTms_VERBOSE       1
 
 
 typedef struct {
-	pthread_t tcRespReceiverThread;
-} arDroneTcs_threads;
+	pthread_t tmReceiverThread;
+} droneTms_threads;
 
 /**
  * @date 06/11/2016
@@ -38,7 +38,7 @@ typedef struct {
  *
  * TODO
  */
-bool arDroneTcs_init();
+bool droneTms_init();
 
 /**
  * @date 06/11/2016
@@ -46,14 +46,6 @@ bool arDroneTcs_init();
  *
  * TODO
  */
-arDroneTcs_threads arDroneTcs_getThreadsIds();
+droneTms_threads droneTms_getThreadsIds();
 
-/**
- * @date 06/11/2016
- * @autho Rafael B. Januzi (rjanuzi@gmail.com)
- *
- * TODO
- */
-bool arDroneTcs_sendAtCmd(const char* cmd);
-
-#endif /* ARDRONETCS_H_ */
+#endif /* droneTms_H_ */
