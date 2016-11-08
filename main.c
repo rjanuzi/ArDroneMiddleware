@@ -9,8 +9,8 @@ int main(int argc, char** argv)
 	droneTms_init();
 	//	arDroneTcs_init();
 
-	sleep(5);
-
+//	sleep(5);
+//
 //	seq = 1;
 //	while(seq < 10)
 //	{

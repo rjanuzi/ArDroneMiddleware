@@ -31,3 +31,9 @@
 # Debug files
 *.dSYM/
 *.su
+
+#Eclipse project config files
+.project
+.cproject
+.settings/
+.README.md.swp
