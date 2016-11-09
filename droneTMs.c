@@ -8,7 +8,7 @@ void* droneTms_tmReceiverThread(void *arg)
 	static int s, i, slen=sizeof(si_other);
 	static char buf[UTIL_UDP_BUFFLEN];
 
-	printf("droneTms.droneTms_tmReceiverThread: LOG - Sending SOME BYTES to Drone.\n");
+	printf("[LOG]: droneTms.droneTms_tmReceiverThread - Sending SOME BYTES to Drone.\n");
 	while(!utilUdp_sendUdpMsg("SOME BYTES", DRONE_IP, DRONE_NAVDATA_PORT, DRONE_NAVDATA_PORT))
 	{
 		printf("Trying again in 10 seconds...\n");
@@ -21,7 +21,7 @@ void* droneTms_tmReceiverThread(void *arg)
 
 		while( (s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1 )
 		{
-			printf("droneTms.droneTms_tmReceiverThread: ERROR - Can't open the socket.\n");
+			printf("\n[ERROR]: droneTms.droneTms_tmReceiverThread - Can't open the socket.\n");
 			printf("Trying again in 10 seconds...\n");
 			sleep(10);
 		}
@@ -33,14 +33,14 @@ void* droneTms_tmReceiverThread(void *arg)
 
 		if( bind(s, (__CONST_SOCKADDR_ARG) &si_me, (socklen_t) sizeof(si_me)) == -1)
 		{
-			printf("droneTms.droneTms_tmReceiverThread: ERROR - Can't bind the socket.\n");
+			printf("[ERROR]: droneTms.droneTms_tmReceiverThread - Can't bind the socket.\n");
 			printf("Trying again in 10 seconds...\n");
 			sleep(10);
 		}
 
 		if( recvfrom(s, (void *__restrict) buf, (size_t) UTIL_UDP_BUFFLEN, 0, (__SOCKADDR_ARG) &si_other, (socklen_t *__restrict) &slen) == -1)
 		{
-			printf("droneTms.droneTms_tmReceiverThread: ERROR - Fail to receive packet.\n");
+			printf("[ERROR]: droneTms.droneTms_tmReceiverThread - Fail to receive packet.\n");
 		}
 
 		printf("Received packet from %s:%d\nData: %s\n\n", inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port), buf);
@@ -59,12 +59,12 @@ bool droneTms_init()
 
 	if(err != 0)
 	{
-		printf("\ndroneTms.droneTms_init - ERROR - Can't create droneTms_tmReceiverThread: [%s]", strerror(err));
+		printf("\n[ERROR]: droneTms.droneTms_init - Can't create droneTms_tmReceiverThread: [%s]", strerror(err));
 		return false;
 	}
 	else
 	{
-		printf("\ndroneTms.droneTms_init - LOG - droneTms_tmReceiverThread created sucessfully\n");
+		printf("\n[LOG]: droneTms.droneTms_init - droneTms_tmReceiverThread created sucessfully\n");
 		return true;
 	}
 }

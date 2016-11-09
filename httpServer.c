@@ -12,13 +12,13 @@
 
 #include <httpServer.h>
 
-#define TEST_JSON	"{\"alt\":1.0,\"lat\":2.0,\"lon\":3.0,\"vel_x\":4.0,\"vel_y\":5.0,\"vel_z\":6.0,\"pitch\":7.0,\"roll\":8.0,\"yaw\":9.0,\"temp\":10.0,\"bat\":11.0,\"press\":12.0}"
+#define TEST_JSON	"{\"alt\":1.0,\"lat\":-23.210240,\"lon\": -45.875479,\"vel_x\":0.0,\"vel_y\":0.0,\"vel_z\":0.0,\"pitch\":0.0,\"roll\":0.0,\"yaw\":-37.0,\"temp\":25.0,\"bat\":73.0,\"press\":1.0}"
 
 pthread_t serverThreadHandle;
 
 #define ISspace(x) isspace((int)(x))
 
-#define SERVER_STRING "Server: jdbhttpd/0.1.0\r\n"
+#define SERVER_STRING "Server: arDroneMiddleware/1.0-mocked\r\n"
 
 void accept_request(int);
 void bad_request(int);
@@ -43,7 +43,7 @@ void* httpServer_serverThread(void *arg)
 	pthread_t newthread;
 
 	server_sock = startup(&port);
-	printf("HTTP Server running on port %d\n", port);
+	printf("\n[LOG]: HTTP Server running on port %d\n", port);
 
 	while (1)
 	{
@@ -81,6 +81,7 @@ void accept_request(int client)
 
 	numchars = get_line(client, buf, sizeof(buf));
 	i = 0; j = 0;
+
 	while (!ISspace(buf[j]) && (i < sizeof(method) - 1))
 	{
 		method[i] = buf[j];
@@ -88,18 +89,18 @@ void accept_request(int client)
 	}
 	method[i] = '\0';
 
-	if (strcasecmp(method, "GET") && strcasecmp(method, "POST"))
+	/* Nesse momento estamos apenas considerando GETs */
+	if (strcasecmp(method, "GET") != 0)
 	{
 		unimplemented(client);
 		return;
 	}
 
-	if (strcasecmp(method, "POST") == 0)
-		cgi = 1;
-
 	i = 0;
 	while (ISspace(buf[j]) && (j < sizeof(buf)))
+	{
 		j++;
+	}
 	while (!ISspace(buf[j]) && (i < sizeof(url) - 1) && (j < sizeof(buf)))
 	{
 		url[i] = buf[j];
@@ -107,40 +108,64 @@ void accept_request(int client)
 	}
 	url[i] = '\0';
 
-	if (strcasecmp(method, "GET") == 0)
+	//Para essa aplicacao especifica apenas checa-se para os casos especificos a url e responde de acordo.
+	if(strcmp(url, HTTP_SERVER_TM_URL) == 0)
 	{
-		query_string = url;
-		while ((*query_string != '?') && (*query_string != '\0'))
-			query_string++;
-		if (*query_string == '?')
-		{
-			cgi = 1;
-			*query_string = '\0';
-			query_string++;
-		}
-	}
-
-	sprintf(path, "htdocs%s", url);
-	if (path[strlen(path) - 1] == '/')
-		strcat(path, "index.html");
-	if (stat(path, &st) == -1) {
-		while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
-			numchars = get_line(client, buf, sizeof(buf));
-		not_found(client);
+		//Solicitacao de TMs
+		httpServer_sendTms(client);
 	}
 	else
 	{
-		if ((st.st_mode & S_IFMT) == S_IFDIR)
-			strcat(path, "/index.html");
-		if ((st.st_mode & S_IXUSR) ||
-				(st.st_mode & S_IXGRP) ||
-				(st.st_mode & S_IXOTH)    )
-			cgi = 1;
-		if (!cgi)
-			serve_file(client, path);
+		if(strcmp(url, HTTP_SERVER_PHOTO_URL) == 0)
+		{
+			//Solicitacao de Foto
+			httpServer_sendPhoto(client);
+		}
 		else
-			execute_cgi(client, path, method, query_string);
+		{
+			printf("\n[ERROR]: URL invalido: %s", url);
+			not_found(client);
+		}
 	}
+
+//	if (strcasecmp(method, "GET") == 0)
+//	{
+//		query_string = url;
+//		while ((*query_string != '?') && (*query_string != '\0'))
+//			query_string++;
+//		if (*query_string == '?')
+//		{
+//			cgi = 1;
+//			*query_string = '\0';
+//			query_string++;
+//		}
+//		else
+//		{
+//			not_found(client);
+//		}
+//	}
+//
+//	sprintf(path, "htdocs%s", url);
+//	if (path[strlen(path) - 1] == '/')
+//		strcat(path, "index.html");
+//	if (stat(path, &st) == -1) {
+//		while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
+//			numchars = get_line(client, buf, sizeof(buf));
+//		not_found(client);
+//	}
+//	else
+//	{
+//		if ((st.st_mode & S_IFMT) == S_IFDIR)
+//			strcat(path, "/index.html");
+//		if ((st.st_mode & S_IXUSR) ||
+//				(st.st_mode & S_IXGRP) ||
+//				(st.st_mode & S_IXOTH)    )
+//			cgi = 1;
+//		if (!cgi)
+//			serve_file(client, path);
+//		else
+//			execute_cgi(client, path, method, query_string);
+//	}
 
 	close(client);
 }
@@ -375,7 +400,7 @@ void headers(int client, const char *filename)
 	strcpy(buf, SERVER_STRING);
 	send(client, buf, strlen(buf), 0);
 	sprintf(buf, "Content-Type: application/json\r\n");
-//	sprintf(buf, "Content-Type: text/html\r\n"); //TODO Alterado
+	//	sprintf(buf, "Content-Type: text/html\r\n"); //TODO Alterado
 	send(client, buf, strlen(buf), 0);
 	strcpy(buf, "\r\n");
 	send(client, buf, strlen(buf), 0);
@@ -431,11 +456,35 @@ void serve_file(int client, const char *filename)
 	else
 	{
 		headers(client, filename);
-//		cat(client, resource); TODO - Alterado
-		sendString(client, TEST_JSON);
-
+		cat(client, resource);
 	}
 	fclose(resource);
+}
+
+void httpServer_sendTms(int client)
+{
+	int numchars = 1;
+	char buf[1024];
+
+	buf[0] = 'A'; buf[1] = '\0';
+	while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
+		numchars = get_line(client, buf, sizeof(buf));
+
+	headers(client, NULL);
+	sendString(client, TEST_JSON);
+}
+
+void httpServer_sendPhoto(int client)
+{
+	int numchars = 1;
+	char buf[1024];
+
+	buf[0] = 'A'; buf[1] = '\0';
+	while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
+		numchars = get_line(client, buf, sizeof(buf));
+
+	headers(client, NULL);
+	sendString(client, "FOTO :)");
 }
 
 /**********************************************************************/
@@ -507,12 +556,12 @@ bool httpServer_init(void)
 
 	if(err != 0)
 	{
-		printf("\nhttpServer.httpServer_init - ERROR - Can't create httpServer_serverThread: [%s]", strerror(err));
+		printf("\n[ERROR]: httpServer.httpServer_init - Can't create httpServer_serverThread: [%s]", strerror(err));
 		return false;
 	}
 	else
 	{
-		printf("\nhttpServer.httpServer_init - LOG - httpServer_serverThread created sucessfully\n");
+		printf("\n[LOG]: httpServer.httpServer_init - httpServer_serverThread created sucessfully\n");
 		return true;
 	}
 }

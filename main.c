@@ -12,10 +12,10 @@ int main(int argc, char** argv)
 //	sleep(5);
 //
 //	seq = 1;
-//	while(seq < 10)
+//	while(seq < 2)
 //	{
 //		ATCMD_CREATE_AT_REF_CMD(atCmd, seq, ATCMD_AT_REF_FIXED_BITS | ATCMD_AT_REF_TAKE_OF_FLAG);
-//		arDroneTcs_sendAtCmd(atCmd);
+//		droneTcs_sendAtCmd(atCmd);
 //		seq++;
 //	}
 //
@@ -25,7 +25,7 @@ int main(int argc, char** argv)
 //	while(seq < 10)
 //	{
 //		ATCMD_CREATE_AT_REF_CMD(atCmd, seq, ATCMD_AT_REF_FIXED_BITS | ATCMD_AT_REF_LAND_FLAG);
-//		arDroneTcs_sendAtCmd(atCmd);
+//		droneTcs_sendAtCmd(atCmd);
 //		seq++;
 //	}
 

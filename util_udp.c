@@ -8,7 +8,7 @@ bool utilUdp_sendUdpMsg(const char* msg, const char* hostIp, int destPort, int s
 
 	if ( (s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP))==-1)
 	{
-		printf("\nutil_udp.utilUdp_sendUdpMsg - ERROR: Fail to open socket.");
+		printf("\n[ERROR]: util_udp.utilUdp_sendUdpMsg - Fail to open socket.");
 		goto err;
 	}
 
@@ -23,13 +23,13 @@ bool utilUdp_sendUdpMsg(const char* msg, const char* hostIp, int destPort, int s
 
 	if (inet_aton(hostIp, &si_other.sin_addr)==0)
 	{
-		printf("\nutil_udp.utilUdp_sendUdpMsg - ERROR: inet_aton() failed.");
+		printf("\n[ERROR]: util_udp.utilUdp_sendUdpMsg - inet_aton() failed.");
 		goto err;
 	}
 
 	if( bind(s, (__CONST_SOCKADDR_ARG) &si_me, (socklen_t) sizeof(si_me)) == -1)
 	{
-		printf("utilUdp.utilUdp_sendUdpMsg: ERROR - Can't bind the socket.\n");
+		printf("\n[ERROR]: utilUdp.utilUdp_sendUdpMsg - Can't bind the socket.\n");
 		printf("Trying again in 10 seconds...\n");
 		sleep(10);
 	}
@@ -37,7 +37,7 @@ bool utilUdp_sendUdpMsg(const char* msg, const char* hostIp, int destPort, int s
 	sprintf(buf, "%s", msg);
 	if( sendto(s, (const void*) &msg[0], (size_t) strlen(msg), 0, (__CONST_SOCKADDR_ARG)&si_other, (socklen_t)slen) == -1)
 	{
-		printf("\nutil_udp.utilUdp_sendUdpMsg - ERROR: Sending fail.");
+		printf("\n[ERROR]: util_udp.utilUdp_sendUdpMsg - Sending fail.");
 		goto err;
 	}
 

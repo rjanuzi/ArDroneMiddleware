@@ -16,7 +16,11 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
-#define HTTP_SERVER_PORT	5000
+#define HTTP_SERVER_PORT		5000
+
+#define HTTP_SERVER_TM_URL		"/ardroneMiddleware/tm"
+#define HTTP_SERVER_PHOTO_URL	"/ardroneMiddleware/photo"
+
 
 /**
  * @date 07/11/2016
@@ -34,5 +38,21 @@ void sendString(int client, const char* strToSend);
  * TODO
  */
 bool httpServer_init(void);
+
+/**
+ * @date 09/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * TODO
+ */
+void httpServer_sendTms(int client);
+
+/**
+ * @date 09/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * TODO
+ */
+void httpServer_sendPhoto(client);
 
 #endif /* HTTPSERVER_H_ */
