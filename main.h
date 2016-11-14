@@ -9,14 +9,15 @@
 
 /* Utilitarias */
 #include <util_udp.h>
+#include <util_imgs.h>
 
 /* HTTP Server */
 #include <httpServer.h>
-#include "droneAtCommands.h"
+#include <droneAtCommands.h>
 
 /* Drone Libs */
-#include "droneTCs.h"
-#include "droneTMs.h"
+#include <droneTCs.h>
+#include <droneTMs.h>
 
 
 #endif /* MAIN_H_ */

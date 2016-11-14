@@ -4,9 +4,13 @@ int main(int argc, char** argv)
 {
 	char atCmd[50];
 	int seq;
+	char imgStr[5000000];
 
-	httpServer_init();
-	droneTms_init();
+	utilImgs_getHexString("mockedImg.jpg", imgStr);
+	utilImgs_hexToFile(imgStr, "mockedImg-Reconstructed.jpg");
+
+//	httpServer_init();
+//	droneTms_init();
 	//	arDroneTcs_init();
 
 //	sleep(5);
