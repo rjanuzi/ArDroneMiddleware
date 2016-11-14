@@ -4,22 +4,6 @@ volatile static droneTms_threads_t droneTms_threads;
 
 /* TM and Photo DataPoll */
 volatile static droneTms_tmData_t droneTms_lastTmData =
-#if(DRONE_TMS_MOCKED_DATA)
-{
-		.alt = 1.0,
-		.lat = -23.210240,
-		.lon = -45.875479,
-		.vel_x = 5.0,
-		.vel_y = 3.5,
-		.vel_z = 1.2,
-		.pitch = 0.35,
-		.roll = 0.18,
-		.yaw = -47.23,
-		.temp = 25.0,
-		.bat = 73.0,
-		.press = 1.0
-};
-#else
 {
 		.alt = 0.0,
 		.lat = 0.0,
@@ -34,18 +18,9 @@ volatile static droneTms_tmData_t droneTms_lastTmData =
 		.bat = 0.0,
 		.press = 0.0
 };
-#endif
 
-volatile static droneTms_photo_t droneTms_lastPhotoData =
-#if(DRONE_TMS_MOCKED_DATA)
-{
-		.imgHex = "Img Hex :)"
-};
-#else
-{
-		.imgHex = ""
-};
-#endif
+uint8_t droneTms_lastImgData[DRONE_PHOTO_MAX_LEN];
+uint16_t droneTms_lastImgDataLen = 0;
 
 void* droneTms_tmReceiverThread(void *arg)
 {
@@ -110,8 +85,9 @@ bool droneTms_init()
 	else
 	{
 		printf("\n[LOG]: droneTms.droneTms_init - droneTms_tmReceiverThread created sucessfully\n");
-		return true;
 	}
+
+	return true;
 }
 
 droneTms_threads_t droneTms_getThreadsIds()
@@ -121,10 +97,32 @@ droneTms_threads_t droneTms_getThreadsIds()
 
 droneTms_tmData_t droneTms_getTmData()
 {
+#if(DRONE_TMS_MOCKED_DATA)
+	droneTms_lastTmData.alt = 1.0;
+	droneTms_lastTmData.lat = -23.210240;
+	droneTms_lastTmData.lon = -45.875479;
+	droneTms_lastTmData.vel_x = 5.0;
+	droneTms_lastTmData.vel_y = 3.5;
+	droneTms_lastTmData.vel_z = 1.2;
+	droneTms_lastTmData.pitch = 0.35;
+	droneTms_lastTmData.roll = 0.18;
+	droneTms_lastTmData.yaw = -47.23;
+	droneTms_lastTmData.temp = 25.0;
+	droneTms_lastTmData.bat = 73.0;
+	droneTms_lastTmData.press = 1.0;
+#endif
 	return droneTms_lastTmData;
 }
 
-droneTms_photo_t droneTms_getPhoto()
+uint16_t droneTms_getPhoto(uint8_t* photoDataOut)
 {
-	return droneTms_lastPhotoData;
+#if(DRONE_TMS_MOCKED_DATA)
+	droneTms_lastImgDataLen = utilImgs_getImgBin("droneMockedImg.jpg", droneTms_lastImgData);
+	//droneTms_lastImgDataLen = utilImgs_getImgBin("droneMockedImg2.jpg", droneTms_lastImgData);
+#endif
+
+	memset(photoDataOut, 0, DRONE_PHOTO_MAX_LEN);
+	memcpy(photoDataOut, droneTms_lastImgData, droneTms_lastImgDataLen);
+
+	return droneTms_lastImgDataLen;
 }

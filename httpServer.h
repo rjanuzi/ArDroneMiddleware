@@ -25,13 +25,8 @@
 #define HTTP_SERVER_TM_URL		"/ardroneMiddleware/tm"
 #define HTTP_SERVER_PHOTO_URL	"/ardroneMiddleware/photo"
 
-#define HTTP_SERVER_PHOTO_JSON_MAX_SIZE	5000000
-
 #define HTTP_SERVER_TM_JSON_TEMPLATE	"{\"alt\":%f,\"lat\":%f,\"lon\":%f,\"vel_x\":%f,\"vel_y\":%f,\"vel_z\":%f,\"pitch\":%f,\"roll\":%f,\"yaw\":%f,\"temp\":%f,\"bat\":%f,\"press\":%f}"
-#define HTTP_SERVER_PHOTO_JSON_TEMPLATE	"{\"imgHex\":\"%s\"}"
-
 #define HTTP_SERVER_TM_JSON_CREATE(tmData, jsonOut) { sprintf(jsonOut, HTTP_SERVER_TM_JSON_TEMPLATE, tmData.alt, tmData.lat, tmData.lon, tmData.vel_x, tmData.vel_y, tmData.vel_z, tmData.pitch, tmData.roll, tmData.yaw, tmData.temp, tmData.bat, tmData.press); };
-#define HTTP_SERVER_PHOTO_JSON_CREATE(photoData, jsonOut) { sprintf(jsonOut, HTTP_SERVER_PHOTO_JSON_TEMPLATE, photoData.imgHex); };
 
 /**
  * @date 07/11/2016
@@ -59,11 +54,19 @@ bool httpServer_init(void);
 void httpServer_sendTms(int client);
 
 /**
- * @date 09/11/2016
+ * @date 14/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
  * TODO
  */
-void httpServer_sendPhoto(client);
+void httpServer_sendPhotoData(int client);
+
+/**
+ * @date 14/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * TODO
+ */
+void httpServer_headersJPG(int client, uint16_t imgLenBytes);
 
 #endif /* HTTPSERVER_H_ */

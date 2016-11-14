@@ -119,7 +119,7 @@ void accept_request(int client)
 		if(strcmp(url, HTTP_SERVER_PHOTO_URL) == 0)
 		{
 			//Solicitacao de Foto
-			httpServer_sendPhoto(client);
+			httpServer_sendPhotoData(client);
 		}
 		else
 		{
@@ -128,44 +128,44 @@ void accept_request(int client)
 		}
 	}
 
-//	if (strcasecmp(method, "GET") == 0)
-//	{
-//		query_string = url;
-//		while ((*query_string != '?') && (*query_string != '\0'))
-//			query_string++;
-//		if (*query_string == '?')
-//		{
-//			cgi = 1;
-//			*query_string = '\0';
-//			query_string++;
-//		}
-//		else
-//		{
-//			not_found(client);
-//		}
-//	}
-//
-//	sprintf(path, "htdocs%s", url);
-//	if (path[strlen(path) - 1] == '/')
-//		strcat(path, "index.html");
-//	if (stat(path, &st) == -1) {
-//		while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
-//			numchars = get_line(client, buf, sizeof(buf));
-//		not_found(client);
-//	}
-//	else
-//	{
-//		if ((st.st_mode & S_IFMT) == S_IFDIR)
-//			strcat(path, "/index.html");
-//		if ((st.st_mode & S_IXUSR) ||
-//				(st.st_mode & S_IXGRP) ||
-//				(st.st_mode & S_IXOTH)    )
-//			cgi = 1;
-//		if (!cgi)
-//			serve_file(client, path);
-//		else
-//			execute_cgi(client, path, method, query_string);
-//	}
+	//	if (strcasecmp(method, "GET") == 0)
+	//	{
+	//		query_string = url;
+	//		while ((*query_string != '?') && (*query_string != '\0'))
+	//			query_string++;
+	//		if (*query_string == '?')
+	//		{
+	//			cgi = 1;
+	//			*query_string = '\0';
+	//			query_string++;
+	//		}
+	//		else
+	//		{
+	//			not_found(client);
+	//		}
+	//	}
+	//
+	//	sprintf(path, "htdocs%s", url);
+	//	if (path[strlen(path) - 1] == '/')
+	//		strcat(path, "index.html");
+	//	if (stat(path, &st) == -1) {
+	//		while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
+	//			numchars = get_line(client, buf, sizeof(buf));
+	//		not_found(client);
+	//	}
+	//	else
+	//	{
+	//		if ((st.st_mode & S_IFMT) == S_IFDIR)
+	//			strcat(path, "/index.html");
+	//		if ((st.st_mode & S_IXUSR) ||
+	//				(st.st_mode & S_IXGRP) ||
+	//				(st.st_mode & S_IXOTH)    )
+	//			cgi = 1;
+	//		if (!cgi)
+	//			serve_file(client, path);
+	//		else
+	//			execute_cgi(client, path, method, query_string);
+	//	}
 
 	close(client);
 }
@@ -400,7 +400,6 @@ void headers(int client, const char *filename)
 	strcpy(buf, SERVER_STRING);
 	send(client, buf, strlen(buf), 0);
 	sprintf(buf, "Content-Type: application/json\r\n");
-	//	sprintf(buf, "Content-Type: text/html\r\n"); //TODO Alterado
 	send(client, buf, strlen(buf), 0);
 	strcpy(buf, "\r\n");
 	send(client, buf, strlen(buf), 0);
@@ -477,20 +476,36 @@ void httpServer_sendTms(int client)
 	sendString(client, resultJson);
 }
 
-void httpServer_sendPhoto(int client)
+void httpServer_sendPhotoData(int client)
 {
-	int numchars = 1;
+	uint16_t numBytes = -1;
+	uint8_t imgBinData[DRONE_PHOTO_MAX_LEN];
+
+	numBytes = droneTms_getPhoto(imgBinData);
+
+	if(numBytes < 0)
+	{
+		printf("[ERROR]: httpServer_sendPhotoData - Fail reading the image bytes.");
+		not_found(client);
+		return;
+	}
+
+	httpServer_headersJPG(client, numBytes);
+	send(client, (void*) imgBinData, (size_t) numBytes, 0);
+}
+
+void httpServer_headersJPG(int client, uint16_t imgLenBytes)
+{
 	char buf[1024];
-	char resultJson[HTTP_SERVER_PHOTO_JSON_MAX_SIZE];
 
-	buf[0] = 'A'; buf[1] = '\0';
-	while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
-		numchars = get_line(client, buf, sizeof(buf));
-
-	HTTP_SERVER_PHOTO_JSON_CREATE(droneTms_getPhoto(), resultJson);
-
-	headers(client, NULL);
-	sendString(client, resultJson);
+	strcpy(buf, "HTTP/1.0 200 OK\r\n");
+	send(client, buf, strlen(buf), 0);
+	strcpy(buf, SERVER_STRING);
+	send(client, buf, strlen(buf), 0);
+	sprintf(buf, "Content-Length: %d\r\nContent-Type: image/jpeg\r\n", imgLenBytes);
+	send(client, buf, strlen(buf), 0);
+	strcpy(buf, "\r\n");
+	send(client, buf, strlen(buf), 0);
 }
 
 /**********************************************************************/

@@ -23,6 +23,14 @@ bool utilImgs_getHexString(const char* imgFilePath, char* strOut);
  *
  * TODO
  */
+int utilImgs_getImgBin(const char* imgFilePath, uint8_t* outArray);
+
+/**
+ * @date 14/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * TODO
+ */
 bool utilImgs_hexToFile(const char* hexString, char* filePath);
 
 /**

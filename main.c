@@ -6,7 +6,7 @@ int main(int argc, char** argv)
 	int seq;
 
 	httpServer_init();
-//	droneTms_init();
+	droneTms_init();
 	//	arDroneTcs_init();
 
 //	sleep(5);

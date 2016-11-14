@@ -10,6 +10,7 @@
 
 /* Util */
 #include <util_udp.h>
+#include <util_imgs.h>
 
 /* Threads */
 #include <pthread.h>
@@ -27,6 +28,7 @@
 /* General defines */
 #define DRONE_TMS_VERBOSE		1
 #define DRONE_TMS_MOCKED_DATA	1
+#define DRONE_PHOTO_MAX_LEN		5000000
 
 typedef struct {
 	pthread_t tmReceiverThread;
@@ -46,10 +48,6 @@ typedef struct {
 	float bat;
 	float press;
 } droneTms_tmData_t;
-
-typedef struct {
-	char* imgHex;
-} droneTms_photo_t;
 
 /**
  * @date 06/11/2016
@@ -81,6 +79,6 @@ droneTms_tmData_t droneTms_getTmData();
  *
  * TODO
  */
-droneTms_photo_t droneTms_getPhoto();
+uint16_t droneTms_getPhoto(uint8_t* photoDataOut);
 
 #endif /* droneTms_H_ */

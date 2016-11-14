@@ -35,6 +35,27 @@ bool utilImgs_getHexString(const char* imgFilePath, char* strOut)
 	return true;
 }
 
+int utilImgs_getImgBin(const char* imgFilePath, uint8_t* outArray)
+{
+	FILE* imgFile = fopen(imgFilePath, "r");
+	uint16_t lenReaded;
+	int index = 0;
+
+	if(imgFile == NULL)
+	{
+		return -1;
+	}
+
+	while( (lenReaded = fread((void*)&outArray[index], (size_t) 1, UTIL_IMGS_MEMO_BLOCK_SIZE, imgFile)) > 0)
+	{
+		index += lenReaded;
+	}
+
+	fclose(imgFile);
+
+	return index;
+}
+
 bool utilImgs_hexToFile(const char* hexString, char* filePath)
 {
 	FILE* fileToSave = fopen(filePath, "w");
