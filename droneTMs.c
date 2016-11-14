@@ -1,6 +1,51 @@
 #include "droneTMs.h"
 
-static droneTms_threads threads;
+volatile static droneTms_threads_t droneTms_threads;
+
+/* TM and Photo DataPoll */
+volatile static droneTms_tmData_t droneTms_lastTmData =
+#if(DRONE_TMS_MOCKED_DATA)
+{
+		.alt = 1.0,
+		.lat = -23.210240,
+		.lon = -45.875479,
+		.vel_x = 5.0,
+		.vel_y = 3.5,
+		.vel_z = 1.2,
+		.pitch = 0.35,
+		.roll = 0.18,
+		.yaw = -47.23,
+		.temp = 25.0,
+		.bat = 73.0,
+		.press = 1.0
+};
+#else
+{
+		.alt = 0.0,
+		.lat = 0.0,
+		.lon = 0.0,
+		.vel_x = 0.0,
+		.vel_y = 0.0,
+		.vel_z = 0.0,
+		.pitch = 0.0,
+		.roll = 0.0,
+		.yaw = 0.0,
+		.temp = 0.0,
+		.bat = 0.0,
+		.press = 0.0
+};
+#endif
+
+volatile static droneTms_photo_t droneTms_lastPhotoData =
+#if(DRONE_TMS_MOCKED_DATA)
+{
+		.imgHex = "Img Hex :)"
+};
+#else
+{
+		.imgHex = ""
+};
+#endif
 
 void* droneTms_tmReceiverThread(void *arg)
 {
@@ -55,7 +100,7 @@ bool droneTms_init()
 {
 	int err;
 
-	err = pthread_create(&threads.tmReceiverThread, NULL, &droneTms_tmReceiverThread, NULL);
+	err = pthread_create(&droneTms_threads.tmReceiverThread, NULL, &droneTms_tmReceiverThread, NULL);
 
 	if(err != 0)
 	{
@@ -69,7 +114,17 @@ bool droneTms_init()
 	}
 }
 
-droneTms_threads droneTms_getThreadsIds()
+droneTms_threads_t droneTms_getThreadsIds()
 {
-	return threads;
+	return droneTms_threads;
+}
+
+droneTms_tmData_t droneTms_getTmData()
+{
+	return droneTms_lastTmData;
+}
+
+droneTms_photo_t droneTms_getPhoto()
+{
+	return droneTms_lastPhotoData;
 }

@@ -14,7 +14,7 @@
 
 #define TEST_JSON	"{\"alt\":1.0,\"lat\":-23.210240,\"lon\": -45.875479,\"vel_x\":0.0,\"vel_y\":0.0,\"vel_z\":0.0,\"pitch\":0.0,\"roll\":0.0,\"yaw\":-37.0,\"temp\":25.0,\"bat\":73.0,\"press\":1.0}"
 
-pthread_t serverThreadHandle;
+volatile static pthread_t serverThreadHandle;
 
 #define ISspace(x) isspace((int)(x))
 
@@ -52,7 +52,7 @@ void* httpServer_serverThread(void *arg)
 			error_die("accept");
 
 		/* accept_request(client_sock); */
-		if (pthread_create(&newthread , NULL, accept_request, client_sock) != 0)
+		if (pthread_create(&newthread ,(volatile const pthread_attr_t* ) NULL, accept_request, client_sock) != 0)
 			perror("pthread_create");
 	}
 
@@ -465,26 +465,32 @@ void httpServer_sendTms(int client)
 {
 	int numchars = 1;
 	char buf[1024];
+	char resultJson[1024];
 
 	buf[0] = 'A'; buf[1] = '\0';
 	while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
 		numchars = get_line(client, buf, sizeof(buf));
 
+	HTTP_SERVER_TM_JSON_CREATE(droneTms_getTmData(), resultJson);
+
 	headers(client, NULL);
-	sendString(client, TEST_JSON);
+	sendString(client, resultJson);
 }
 
 void httpServer_sendPhoto(int client)
 {
 	int numchars = 1;
 	char buf[1024];
+	char resultJson[HTTP_SERVER_PHOTO_JSON_MAX_SIZE];
 
 	buf[0] = 'A'; buf[1] = '\0';
 	while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
 		numchars = get_line(client, buf, sizeof(buf));
 
+	HTTP_SERVER_PHOTO_JSON_CREATE(droneTms_getPhoto(), resultJson);
+
 	headers(client, NULL);
-	sendString(client, "FOTO :)");
+	sendString(client, resultJson);
 }
 
 /**********************************************************************/

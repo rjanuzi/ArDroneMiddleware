@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
+
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <netinet/in.h>
@@ -16,11 +18,20 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 
+#include <droneTMs.h>
+
 #define HTTP_SERVER_PORT		5000
 
 #define HTTP_SERVER_TM_URL		"/ardroneMiddleware/tm"
 #define HTTP_SERVER_PHOTO_URL	"/ardroneMiddleware/photo"
 
+#define HTTP_SERVER_PHOTO_JSON_MAX_SIZE	5000000
+
+#define HTTP_SERVER_TM_JSON_TEMPLATE	"{\"alt\":%f,\"lat\":%f,\"lon\":%f,\"vel_x\":%f,\"vel_y\":%f,\"vel_z\":%f,\"pitch\":%f,\"roll\":%f,\"yaw\":%f,\"temp\":%f,\"bat\":%f,\"press\":%f}"
+#define HTTP_SERVER_PHOTO_JSON_TEMPLATE	"{\"imgHex\":\"%s\"}"
+
+#define HTTP_SERVER_TM_JSON_CREATE(tmData, jsonOut) { sprintf(jsonOut, HTTP_SERVER_TM_JSON_TEMPLATE, tmData.alt, tmData.lat, tmData.lon, tmData.vel_x, tmData.vel_y, tmData.vel_z, tmData.pitch, tmData.roll, tmData.yaw, tmData.temp, tmData.bat, tmData.press); };
+#define HTTP_SERVER_PHOTO_JSON_CREATE(photoData, jsonOut) { sprintf(jsonOut, HTTP_SERVER_PHOTO_JSON_TEMPLATE, photoData.imgHex); };
 
 /**
  * @date 07/11/2016

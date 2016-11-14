@@ -4,12 +4,8 @@ int main(int argc, char** argv)
 {
 	char atCmd[50];
 	int seq;
-	char imgStr[5000000];
 
-	utilImgs_getHexString("mockedImg.jpg", imgStr);
-	utilImgs_hexToFile(imgStr, "mockedImg-Reconstructed.jpg");
-
-//	httpServer_init();
+	httpServer_init();
 //	droneTms_init();
 	//	arDroneTcs_init();
 
