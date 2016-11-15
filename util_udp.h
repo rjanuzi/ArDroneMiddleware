@@ -22,6 +22,14 @@
  *
  * TODO
  */
-bool utilUdp_sendUdpMsg(const char* msg, const char* hostIp, int destPort, int srcPort);
+bool utilUdp_sendUdpMsg(const uint8_t* msg, const char* hostIp, int destPort, int srcPort);
+
+/**
+ * @date 15/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * TODO
+ */
+bool utilUdp_receiveUdpMsg(uint8_t* buf, int destPort);
 
 #endif /* UTILUDP_H_ */

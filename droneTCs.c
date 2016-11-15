@@ -10,8 +10,6 @@ void* droneTcs_tcRespReceiverThread(void *arg)
 
 	while( true )
 	{
-		printf("\nReceive Loop (TCs) \n\n\n");
-
 		while( (s=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1 )
 		{
 			printf("\n[ERROR]:droneTcs_tcRespReceiverThread - Can't open the socket.\n");

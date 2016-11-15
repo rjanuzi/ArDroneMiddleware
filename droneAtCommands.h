@@ -12,7 +12,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define ATCMD_AT_REF	"AT*REF=%d,%d\r"
+#define ATCMD_AT_REF		"AT*REF=%d,%d\r"
+#define ATCMD_AT_COM_WDT	"AT*COMWDG\r"
 
 #define ATCMD_CREATE_AT_REF_CMD(strOut, seqNbr, uint32CtrlMask)	{sprintf(strOut, ATCMD_AT_REF, seqNbr, uint32CtrlMask);}
 

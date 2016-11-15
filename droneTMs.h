@@ -23,15 +23,19 @@
 #include <errno.h>
 
 /* Drone */
-#include "droneDefines.h"
+#include <droneDefines.h>
+#include <droneAtCommands.h>
+#include <droneTCs.h>
 
 /* General defines */
+#define DRONE_TMS_WDT_RESET_VAL	10
 #define DRONE_TMS_VERBOSE		1
 #define DRONE_TMS_MOCKED_DATA	1
 #define DRONE_PHOTO_MAX_LEN		5000000
 
 typedef struct {
 	pthread_t tmReceiverThread;
+	pthread_t comWdtCheckerThread;
 } droneTms_threads_t;
 
 typedef struct {
@@ -80,5 +84,13 @@ droneTms_tmData_t droneTms_getTmData();
  * TODO
  */
 uint16_t droneTms_getPhoto(uint8_t* photoDataOut);
+
+/**
+ * @date 15/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * TODO
+ */
+void droneTms_hexDump(uint8_t* buf, uint16_t len);
 
 #endif /* droneTms_H_ */
