@@ -35,7 +35,7 @@
 
 typedef struct {
 	pthread_t tmReceiverThread;
-	pthread_t comWdtCheckerThread;
+	pthread_t comKeepAliveThread;
 } droneTms_threads_t;
 
 typedef struct {

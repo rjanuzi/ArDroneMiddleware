@@ -1,6 +1,6 @@
 #include <util_udp.h>
 
-bool utilUdp_sendUdpMsg(const uint8_t* msg, const char* hostIp, int destPort, int srcPort)
+bool utilUdp_sendUdpMsg(const uint8_t* msg, uint16_t len, const char* hostIp, int destPort, int srcPort)
 {
 	struct sockaddr_in si_other, si_me;
 	int s, i, slen=sizeof(si_other);
@@ -35,7 +35,7 @@ bool utilUdp_sendUdpMsg(const uint8_t* msg, const char* hostIp, int destPort, in
 	}
 
 	sprintf(buf, "%s", msg);
-	if( sendto(s, (const void*) &msg[0], (size_t) strlen(msg), 0, (__CONST_SOCKADDR_ARG)&si_other, (socklen_t)slen) == -1)
+	if( sendto(s, (const void*) &msg[0], (size_t) len, 0, (__CONST_SOCKADDR_ARG)&si_other, (socklen_t)slen) == -1)
 	{
 		printf("\n[ERROR]: util_udp.utilUdp_sendUdpMsg - Sending fail.");
 		goto err;
@@ -51,7 +51,6 @@ bool utilUdp_sendUdpMsg(const uint8_t* msg, const char* hostIp, int destPort, in
 
 bool utilUdp_receiveUdpMsg(uint8_t* buf, int destPort)
 {
-
 	struct sockaddr_in si_other, si_me;
 	int s, slen=sizeof(si_other);
 

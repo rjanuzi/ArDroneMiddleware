@@ -2,6 +2,7 @@
 
 volatile static droneTms_threads_t droneTms_threads;
 volatile static uint8_t droneTms_comWdt = DRONE_TMS_WDT_RESET_VAL;
+volatile static uint32_t droneTms_seqNbr = 1;
 
 /* TM and Photo DataPoll */
 volatile static droneTms_tmData_t droneTms_lastTmData =
@@ -28,39 +29,41 @@ void* droneTms_tmReceiverThread(void *arg)
 	static struct sockaddr_in si_me, si_other;
 	static int s, i, slen=sizeof(si_other);
 	static uint8_t buf[UTIL_UDP_BUFFLEN];
+	char cmd[20];
 
-	utilUdp_sendUdpMsg("SOME BYTES", DRONE_IP, DRONE_NAVDATA_PORT, DRONE_NAVDATA_PORT);
+	memset((void*) buf, 0, (size_t) UTIL_UDP_BUFFLEN);
+	buf[0] = 0x01;
 
-	droneTcs_sendAtCmd(ATCMD_AT_COM_WDT);
+	ATCMD_CREATE_AT_SET_NAVDATA_DEMO_MODE(cmd, droneTms_seqNbr++);
+	droneTcs_sendAtCmd(cmd);
+	ATCMD_CREATE_AT_FLAT_TRIM(cmd, droneTms_seqNbr++);
+	droneTcs_sendAtCmd(cmd);
 
-	utilUdp_sendUdpMsg("SOME BYTES", DRONE_IP, DRONE_NAVDATA_PORT, DRONE_NAVDATA_PORT);
+	utilUdp_sendUdpMsg(buf, 4, DRONE_IP, DRONE_VIDEO_STREAM_PORT, DRONE_VIDEO_STREAM_PORT);
+	utilUdp_sendUdpMsg(buf, 4, DRONE_IP, DRONE_NAVDATA_PORT, DRONE_NAVDATA_PORT);
 
 	while( true )
 	{
 		droneTms_comWdt = DRONE_TMS_WDT_RESET_VAL; /* When this thread runs, some data has been received, so the communication is on. */
 
-		printf("\nReceive Loop\n");
-
 		memset((void*) buf, 0, (size_t) UTIL_UDP_BUFFLEN);
 		utilUdp_receiveUdpMsg( buf, DRONE_NAVDATA_PORT);
 
-		droneTms_hexDump(buf, 20);
+		droneTms_hexDump(buf, 40);
 	}
 
 	return NULL;
 }
 
-void* droneTms_comWdtCheckerThread(void *arg)
+void* droneTms_comKeepAlive(void *arg)
 {
+	char cmd[20];
 
 	while( true )
 	{
-		/* If com wdt reaches 0, send the RESET WDT AT CMD */
-		if(--droneTms_comWdt == 0)
-		{
-			droneTms_comWdt = DRONE_TMS_WDT_RESET_VAL;
-			droneTcs_sendAtCmd(ATCMD_AT_COM_WDT);
-		}
+		droneTms_comWdt = DRONE_TMS_WDT_RESET_VAL;
+		ATCMD_CREATE_AT_COM_WDT(cmd, droneTms_seqNbr++);
+		droneTcs_sendAtCmd(cmd);
 		sleep(1);
 	}
 
@@ -84,15 +87,15 @@ bool droneTms_init()
 	}
 
 	/* COM WDT Checker Thread */
-	err = pthread_create(&droneTms_threads.comWdtCheckerThread, NULL, &droneTms_comWdtCheckerThread, NULL);
+	err = pthread_create(&droneTms_threads.comKeepAliveThread, NULL, &droneTms_comKeepAlive, NULL);
 	if(err != 0)
 	{
-		printf("\n[ERROR]: droneTms_init - Can't create droneTms_comWdtCheckerThread: [%s]", strerror(err));
+		printf("\n[ERROR]: droneTms_init - Can't create droneTms_comKeepAlive: [%s]", strerror(err));
 		return false;
 	}
 	else
 	{
-		printf("\n[LOG]: droneTms_init - droneTms_comWdtCheckerThread created sucessfully\n");
+		printf("\n[LOG]: droneTms_init - droneTms_comKeepAlive created sucessfully\n");
 	}
 
 	return true;

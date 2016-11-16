@@ -22,7 +22,7 @@
  *
  * TODO
  */
-bool utilUdp_sendUdpMsg(const uint8_t* msg, const char* hostIp, int destPort, int srcPort);
+bool utilUdp_sendUdpMsg(const uint8_t* msg, uint16_t len, const char* hostIp, int destPort, int srcPort);
 
 /**
  * @date 15/11/2016
