@@ -31,9 +31,10 @@
 /* General defines */
 #define DRONE_TMS_COM_KEEP_ALIVE_THREAD_DELAY_US	50000
 #define DRONE_TMS_WDT_RESET_VAL						10
-#define DRONE_TMS_VERBOSE							1
-#define DRONE_TMS_MOCKED_DATA						1
 #define DRONE_PHOTO_MAX_LEN							5000000
+
+#define DRONE_TMS_VERBOSE							1
+#define DRONE_TMS_MOCKED_DATA						0
 
 typedef float float32_t;
 

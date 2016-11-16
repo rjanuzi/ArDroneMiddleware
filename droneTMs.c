@@ -1,4 +1,4 @@
-#include "droneTMs.h"
+#include <droneTMs.h>
 
 volatile static droneTms_threads_t droneTms_threads;
 volatile static uint8_t droneTms_comWdt = DRONE_TMS_WDT_RESET_VAL;
@@ -51,8 +51,16 @@ void* droneTms_tmReceiverThread(void *arg)
 		utilUdp_receiveUdpMsg( buf, DRONE_NAVDATA_PORT);
 
 		memcpy((void*) &droneTms_lastNavdataFrame, buf, sizeof(droneTms_navdataFrame_t)); /* Salva a ultima versao do frame */
+		droneTms_lastTmData.alt = droneTms_lastNavdataFrame.navdataDemo.altitude;
+		droneTms_lastTmData.bat = droneTms_lastNavdataFrame.navdataDemo.vbat_flying_percentage;
+		droneTms_lastTmData.pitch = droneTms_lastNavdataFrame.navdataDemo.theta / 1000.0;
+		droneTms_lastTmData.roll = droneTms_lastNavdataFrame.navdataDemo.phi / 1000.0;
+		droneTms_lastTmData.yaw = droneTms_lastNavdataFrame.navdataDemo.psi / 1000.0;
+		droneTms_lastTmData.vel_x = droneTms_lastNavdataFrame.navdataDemo.vx;
+		droneTms_lastTmData.vel_y = droneTms_lastNavdataFrame.navdataDemo.vy;
+		droneTms_lastTmData.vel_z = droneTms_lastNavdataFrame.navdataDemo.vz;
 
-		droneTms_printNavdataFrame(droneTms_lastNavdataFrame);
+//		droneTms_printNavdataFrame(droneTms_lastNavdataFrame);
 	}
 
 	return NULL;

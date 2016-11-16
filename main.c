@@ -5,7 +5,7 @@ int main(int argc, char** argv)
 	char atCmd[50];
 	int seq;
 
-//	httpServer_init();
+	httpServer_init();
 	droneTms_init();
 
 //	sleep(5);
