@@ -6,10 +6,20 @@ POST Drone Commands Test Page
 </head>
 
 <body>
+        <div>
         <form action="http://localhost:5000/ardroneMiddleware/cmd" method="POST">
                 Command: <input type="text" name="cmd"/><br />
                 <input type="submit" value="Send" />
         </form>
+        </div>
+        
+        <div>
+        <h3>Valid commands:</h3>
+        <ul>
+                <li><b>takeoff</b>: Ordena que o Drone levante voo e fique estabilizado no ar.</li>
+                <li><b>land</b>: Ordena que o Drone pouse.</li>
+        </ul> 
+        </div>
 </body>
 
 </html>
