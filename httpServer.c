@@ -73,6 +73,7 @@ void accept_request(int client)
 	char method[255];
 	char url[255];
 	char path[512];
+	char cmdVal[50];
 	size_t i, j;
 	struct stat st;
 	int cgi = 0;      /* becomes true if server decides this is a CGI
@@ -90,41 +91,94 @@ void accept_request(int client)
 	method[i] = '\0';
 
 	/* Nesse momento estamos apenas considerando GETs */
-	if (strcasecmp(method, "GET") != 0)
+	if(strcasecmp(method, "GET") == 0)
 	{
-		unimplemented(client);
-		return;
-	}
-
-	i = 0;
-	while (ISspace(buf[j]) && (j < sizeof(buf)))
-	{
-		j++;
-	}
-	while (!ISspace(buf[j]) && (i < sizeof(url) - 1) && (j < sizeof(buf)))
-	{
-		url[i] = buf[j];
-		i++; j++;
-	}
-	url[i] = '\0';
-
-	//Para essa aplicacao especifica apenas checa-se para os casos especificos a url e responde de acordo.
-	if(strcmp(url, HTTP_SERVER_TM_URL) == 0)
-	{
-		//Solicitacao de TMs
-		httpServer_sendTms(client);
-	}
-	else
-	{
-		if(strcmp(url, HTTP_SERVER_PHOTO_URL) == 0)
+		i = 0;
+		while (ISspace(buf[j]) && (j < sizeof(buf)))
 		{
-			//Solicitacao de Foto
-			httpServer_sendPhotoData(client);
+			j++;
+		}
+		while (!ISspace(buf[j]) && (i < sizeof(url) - 1) && (j < sizeof(buf)))
+		{
+			url[i] = buf[j];
+			i++; j++;
+		}
+		url[i] = '\0';
+
+		//Para essa aplicacao especifica apenas checa-se para os casos especificos a url e responde de acordo.
+		if(strcmp(url, HTTP_SERVER_TM_URL) == 0)
+		{
+			//Solicitacao de TMs
+			httpServer_sendTms(client);
 		}
 		else
 		{
-			printf("\n[ERROR]: URL invalido: %s", url);
-			not_found(client);
+			if(strcmp(url, HTTP_SERVER_PHOTO_URL) == 0)
+			{
+				//Solicitacao de Foto
+				httpServer_sendPhotoData(client);
+			}
+			else
+			{
+				if(strcmp(url, HTTP_SERVER_CMD_URL) == 0)
+				{
+					//Solicitacao da pagina de teste de comandos
+					httpServer_sendPage(client, "cmds_test.html");
+				}
+				else
+				{
+					printf("\n[ERROR]: URL invalido: GET %s\n", url);
+					not_found(client);
+				}
+			}
+		}
+	}
+	else
+	{
+		if(strcasecmp(method, "POST") == 0)
+		{
+			printf("\n[LOG]: Recebido POST.\n");
+			i = 0;
+			while (ISspace(buf[j]) && (j < sizeof(buf)))
+			{
+				j++;
+			}
+			while (!ISspace(buf[j]) && (i < sizeof(url) - 1) && (j < sizeof(buf)))
+			{
+				url[i] = buf[j];
+				i++; j++;
+			}
+			url[i] = '\0';
+
+			//Para essa aplicacao especifica apenas checa-se para os casos especificos a url e responde de acordo.
+			if(strcmp(url, HTTP_SERVER_CMD_URL) == 0)
+			{
+				//Solicitacao de Comando
+				httpServer_sendPage(client, "cmds_test.html");
+				//				httpServer_sendPage(client, "very_simple_page.html");
+
+				/* Procura o parametro HTTP_SERVER_CMD_PARAM no request recebido */
+				do
+				{
+					numchars = get_line(client, buf, sizeof(buf));
+				}while(numchars > 0 && !httpServer_strStartsWith(HTTP_SERVER_CMD_PARAM, buf));
+
+				httpServer_getCmdParamVal(cmdVal, buf);
+
+				printf("\nComando recebido: %s\n", cmdVal);
+
+				httpServer_execDroneCmd(cmdVal);
+			}
+			else
+			{
+				printf("\n[ERROR]: URL invalido: POST %s\n", url);
+				not_found(client);
+			}
+		}
+		else
+		{
+			unimplemented(client);
+			return;
 		}
 	}
 
@@ -508,6 +562,51 @@ void httpServer_headersJPG(int client, uint16_t imgLenBytes)
 	send(client, buf, strlen(buf), 0);
 }
 
+void httpServer_sendPage(int client, const char* pageFile)
+{
+	FILE* page;
+	uint16_t numBytes = -1;
+	uint8_t pageBinData[HTTP_PAGE_FILE_MAX_LEN];
+
+	page = fopen(pageFile, "r");
+
+	if(page == NULL)
+	{
+		printf("[ERROR]: httpServer_sendPage - Fail Opening the page bytes.");
+		not_found(client);
+		return;
+	}
+
+	numBytes = fread((void*) pageBinData, 1, HTTP_PAGE_FILE_MAX_LEN, page);
+
+	fclose(page);
+
+	if(numBytes <= 0)
+	{
+		printf("[ERROR]: httpServer_sendPage - Fail reading the page bytes.");
+		not_found(client);
+		return;
+	}
+
+	httpServer_headersHtml(client, numBytes);
+	send(client, (void*) pageBinData, (size_t) numBytes, 0);
+}
+
+void httpServer_headersHtml(int client, uint16_t size)
+{
+	char buf[1024];
+
+	strcpy(buf, "HTTP/1.0 200 OK\r\n");
+	send(client, buf, strlen(buf), 0);
+	strcpy(buf, SERVER_STRING);
+	send(client, buf, strlen(buf), 0);
+	sprintf(buf, "Content-Length: %d\r\nContent-Type: text/html\r\n", size);
+	send(client, buf, strlen(buf), 0);
+	strcpy(buf, "\r\n");
+	send(client, buf, strlen(buf), 0);
+}
+
+
 /**********************************************************************/
 /* This function starts the process of listening for web connections
  * on a specified port.  If the port is 0, then dynamically allocate a
@@ -584,5 +683,51 @@ bool httpServer_init(void)
 	{
 		printf("\n[LOG]: httpServer.httpServer_init - httpServer_serverThread created sucessfully\n");
 		return true;
+	}
+}
+
+bool httpServer_strStartsWith(const char* pre, const char* str)
+{
+	return strncmp(pre, str, strlen(pre)) == 0;
+}
+
+void httpServer_getCmdParamVal(const char* valOut, const char* cmdParam)
+{
+	int i;
+	sprintf(valOut, "");
+
+	for(i = 0; i < strlen(cmdParam); i++)
+	{
+		//Find the equals('=') char
+		if(cmdParam[i] == '=')
+		{
+			i++;
+			break;
+		}
+	}
+
+	strcpy(valOut, &cmdParam[i]); /* Copia o resto da String para a saida. "cmd=<VALUE>" */
+}
+
+void httpServer_execDroneCmd(const char* cmd)
+{
+	if(strcmp(cmd, HTTP_SERVER_CMD_TAKEOFF) == 0)
+	{
+		//TODO - Executar comando
+		printf("\nTaking off...\n");
+	}
+	else
+	{
+		if(strcmp(cmd, HTTP_SERVER_CMD_LAND) == 0)
+		{
+			//TODO - Executar comando
+			printf("\nLanding...\n");
+		}
+		else
+		{
+			//if()...
+
+			printf("\n[ERROR]: httpServer_execDroneCmd - Drone Command UNKNOW\n");
+		}
 	}
 }

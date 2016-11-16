@@ -34,7 +34,8 @@
 #define DRONE_PHOTO_MAX_LEN							5000000
 
 #define DRONE_TMS_VERBOSE							1
-#define DRONE_TMS_MOCKED_DATA						0
+#define DRONE_TMS_MOCKED_TM							1
+#define DRONE_TMS_MOCKED_PHOTO						1
 
 typedef float float32_t;
 

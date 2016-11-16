@@ -120,7 +120,7 @@ droneTms_threads_t droneTms_getThreadsIds()
 
 droneTms_tmData_t droneTms_getTmData()
 {
-#if(DRONE_TMS_MOCKED_DATA)
+#if(DRONE_TMS_MOCKED_TM)
 	droneTms_lastTmData.alt = 1.0;
 	droneTms_lastTmData.lat = -23.210240;
 	droneTms_lastTmData.lon = -45.875479;
@@ -139,9 +139,8 @@ droneTms_tmData_t droneTms_getTmData()
 
 uint16_t droneTms_getPhoto(uint8_t* photoDataOut)
 {
-#if(DRONE_TMS_MOCKED_DATA)
+#if(DRONE_TMS_MOCKED_PHOTO)
 	droneTms_lastImgDataLen = utilImgs_getImgBin("droneMockedImg.jpg", droneTms_lastImgData);
-	//droneTms_lastImgDataLen = utilImgs_getImgBin("droneMockedImg2.jpg", droneTms_lastImgData);
 #endif
 
 	memset(photoDataOut, 0, DRONE_PHOTO_MAX_LEN);
