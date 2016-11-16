@@ -7,6 +7,7 @@ int main(int argc, char** argv)
 
 	httpServer_init();
 	droneTms_init();
+	console_init();
 
 //	sleep(5);
 //

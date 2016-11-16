@@ -10,6 +10,7 @@
 /* Utilitarias */
 #include <util_udp.h>
 #include <util_imgs.h>
+#include <console.h>
 
 /* HTTP Server */
 #include <httpServer.h>
