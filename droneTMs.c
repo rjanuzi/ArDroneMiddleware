@@ -3,6 +3,7 @@
 volatile static droneTms_threads_t droneTms_threads;
 volatile static uint8_t droneTms_comWdt = DRONE_TMS_WDT_RESET_VAL;
 volatile static uint32_t droneTms_seqNbr = 1;
+volatile static droneTms_navdataFrame_t droneTms_lastNavdataFrame;
 
 /* TM and Photo DataPoll */
 volatile static droneTms_tmData_t droneTms_lastTmData =
@@ -49,7 +50,9 @@ void* droneTms_tmReceiverThread(void *arg)
 		memset((void*) buf, 0, (size_t) UTIL_UDP_BUFFLEN);
 		utilUdp_receiveUdpMsg( buf, DRONE_NAVDATA_PORT);
 
-		droneTms_hexDump(buf, 40);
+		memcpy((void*) &droneTms_lastNavdataFrame, buf, sizeof(droneTms_navdataFrame_t)); /* Salva a ultima versao do frame */
+
+		droneTms_printNavdataFrame(droneTms_lastNavdataFrame);
 	}
 
 	return NULL;
@@ -64,7 +67,8 @@ void* droneTms_comKeepAlive(void *arg)
 		droneTms_comWdt = DRONE_TMS_WDT_RESET_VAL;
 		ATCMD_CREATE_AT_COM_WDT(cmd, droneTms_seqNbr++);
 		droneTcs_sendAtCmd(cmd);
-		sleep(1);
+
+		usleep(DRONE_TMS_COM_KEEP_ALIVE_THREAD_DELAY_US); /* Se nao houver trafego em mais de 50 ms 2 segundos o drone corta a comunicacao */
 	}
 
 	return NULL;
@@ -143,4 +147,42 @@ void droneTms_hexDump(uint8_t* buf, uint16_t len)
 	printf("\nHex Dump: ");
 	for(uint16_t i = 0; i < len; i++)
 		printf(" 0x%x ", buf[i]);
+}
+
+void droneTms_printNavdataFrame(droneTms_navdataFrame_t frame)
+{
+	printf("\nNavdata Frame:");
+	printf("\n\tHeader: 0x%x", frame.header);
+	printf("\n\tDrone State: 0x%x", frame.droneState);
+	printf("\n\tSequence Nmbr: %d", frame.seqNmbr);
+	printf("\n\tVision flag: 0x%x", frame.visionFlag);
+	droneTms_printNavdataDemo(frame.navdataDemo);
+	droneTms_printNavdataCks(frame.navdataCks);
+
+	printf("\n");
+}
+
+void droneTms_printNavdataDemo(droneTms_navdataDemo_t demo)
+{
+	printf("\n\tNavdata Demo:");
+	printf("\n\t\tId: 0x%x", demo.id);
+	printf("\n\t\tSize: %d", demo.size);
+	printf("\n\t\tCtrl State: 0x%x", demo.ctrl_state);
+	printf("\n\t\tVbat: %d perCent", demo.vbat_flying_percentage);
+	printf("\n\t\tTheta (Pitch): %f", demo.theta / 1000.0);
+	printf("\n\t\tPhi (Roll): %f", demo.phi / 1000.0);
+	printf("\n\t\tPsi (Yaw): %f", demo.psi / 1000.0);
+	printf("\n\t\tAltitude: %d", demo.altitude);
+	printf("\n\t\tVelocity (x, y, z): (%f, %f, %f)", demo.vx, demo.vy, demo.vz);
+
+	//The others fields is not important in the moment.
+}
+
+void droneTms_printNavdataCks(droneTms_navdataCks_t cks)
+{
+
+	printf("\n\tChecksum: ");
+	printf("\n\t\tId: 0x%x", cks.id);
+	printf("\n\t\tSize: %d", cks.size);
+	printf("\n\t\tChecksum: 0x%x", cks.cks);
 }

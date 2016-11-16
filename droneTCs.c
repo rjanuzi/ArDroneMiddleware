@@ -67,7 +67,7 @@ droneTcs_threads droneTcs_getThreadsIds()
 
 bool droneTcs_sendAtCmd(const char* cmd)
 {
-	printf("\n[LOG]: droneTcs.droneTcs_sendAtCmd - Sending at cmd (%s) to Drone.\n", cmd);
+//	printf("\n[LOG]: droneTcs.droneTcs_sendAtCmd - Sending at cmd (%s) to Drone.\n", cmd);
 	if(!utilUdp_sendUdpMsg(cmd, strlen(cmd), DRONE_IP, DRONE_ATCMD_PORT, DRONE_ATCMD_PORT))
 		return false;
 

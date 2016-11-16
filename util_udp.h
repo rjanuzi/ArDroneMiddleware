@@ -14,7 +14,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
-#define UTIL_UDP_BUFFLEN	2048
+#define UTIL_UDP_BUFFLEN	4096
 
 /**
  * @date 06/11/2016
