@@ -151,8 +151,10 @@ uint16_t droneTms_getPhoto(uint8_t* photoDataOut)
 
 void droneTms_hexDump(uint8_t* buf, uint16_t len)
 {
+	uint16_t i;
+	
 	printf("\nHex Dump: ");
-	for(uint16_t i = 0; i < len; i++)
+	for(i = 0; i < len; i++)
 		printf(" 0x%x ", buf[i]);
 }
 

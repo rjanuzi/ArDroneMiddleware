@@ -6,6 +6,7 @@ bool utilImgs_getHexString(const char* imgFilePath, char* strOut)
 	uint8_t bytesBlock[UTIL_IMGS_MEMO_BLOCK_SIZE];
 	uint32_t lenReaded;
 	char charAux[2];
+	int i;
 
 	strOut[0] = '\0';
 
@@ -16,7 +17,7 @@ bool utilImgs_getHexString(const char* imgFilePath, char* strOut)
 
 	while( (lenReaded = fread((void*)bytesBlock, (size_t) 1, UTIL_IMGS_MEMO_BLOCK_SIZE, imgFile)) > 0)
 	{
-		for(int i = 0; i < lenReaded; i++)
+		for(i = 0; i < lenReaded; i++)
 		{
 			if(bytesBlock[i] > 0xf)
 			{
@@ -62,6 +63,7 @@ bool utilImgs_hexToFile(const char* hexString, char* filePath)
 	char byteInHex[3];
 	uint8_t byteAux;
 	uint32_t lenReaded;
+	int i;
 
 	if(fileToSave == NULL)
 	{
@@ -71,7 +73,7 @@ bool utilImgs_hexToFile(const char* hexString, char* filePath)
 
 	byteInHex[2] = '\0';
 
-	for(int i = 0; hexString[i+1] != '\0'; i += 2) /* Le de 2 em 2 chars (1 byte) */
+	for(i = 0; hexString[i+1] != '\0'; i += 2) /* Le de 2 em 2 chars (1 byte) */
 	{
 		byteInHex[0] = hexString[i];
 		byteInHex[1] = hexString[i+1];
