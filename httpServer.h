@@ -115,4 +115,12 @@ void httpServer_getCmdParamVal(const char* valOut, const char* cmdParam);
  */
 void httpServer_execDroneCmd(const char* cmd);
 
+/**
+ * @date 19/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * TODO
+ */
+bool httpServer_isServerOk();
+
 #endif /* HTTPSERVER_H_ */

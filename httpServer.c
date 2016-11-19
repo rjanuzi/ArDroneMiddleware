@@ -15,6 +15,7 @@
 
 #define TEST_JSON	"{\"alt\":1.0,\"lat\":-23.210240,\"lon\": -45.875479,\"vel_x\":0.0,\"vel_y\":0.0,\"vel_z\":0.0,\"pitch\":0.0,\"roll\":0.0,\"yaw\":-37.0,\"temp\":25.0,\"bat\":73.0,\"press\":1.0}"
 
+volatile static bool httpServer_ok = false;
 volatile static pthread_t serverThreadHandle;
 
 #define ISspace(x) isspace((int)(x))
@@ -44,20 +45,37 @@ void* httpServer_serverThread(void *arg)
 	pthread_t newthread;
 
 	server_sock = startup(&port);
-	printf("\n[LOG]: HTTP Server running on port %d\n", port);
+
+	if(server_sock < 0)
+	{
+		printf("\n[ERROR]: Fail to initiate the HTTP Server on port %d.", port);
+		goto errInit;
+	}
+	else
+	{
+		printf("\n[LOG]: HTTP Server running on port %d\n", port);
+		httpServer_ok = true;
+	}
 
 	while (1)
 	{
 		client_sock = accept(server_sock,(struct sockaddr *)&client_name, &client_name_len);
 		if (client_sock == -1)
-			error_die("accept");
+		{
+			perror("accept");
+			goto errStops;
+		}
 
 		/* accept_request(client_sock); */
 		if (pthread_create(&newthread ,(volatile const pthread_attr_t* ) NULL, accept_request, client_sock) != 0)
 			perror("pthread_create");
 	}
 
+	errStops:
 	close(server_sock);
+
+	errInit:
+	httpServer_ok = false;
 
 	return NULL;
 }
@@ -586,18 +604,34 @@ int startup(u_short *port)
 	name.sin_family = AF_INET;
 	name.sin_port = htons(*port);
 	name.sin_addr.s_addr = htonl(INADDR_ANY);
+
 	if (bind(httpd, (struct sockaddr *)&name, sizeof(name)) < 0)
+	{
 		error_die("bind");
+		goto err;
+	}
+
 	if (*port == 0)  /* if dynamically allocating a port */
 	{
 		int namelen = sizeof(name);
 		if (getsockname(httpd, (struct sockaddr *)&name, &namelen) == -1)
-			error_die("getsockname");
+		{
+			perror("getsockname");
+			goto err;
+		}
 		*port = ntohs(name.sin_port);
 	}
+
 	if (listen(httpd, 5) < 0)
-		error_die("listen");
+	{
+		perror("listen");
+		goto err;
+	}
+
 	return(httpd);
+
+	err:
+	return -1;
 }
 
 /**********************************************************************/
@@ -689,4 +723,9 @@ void httpServer_execDroneCmd(const char* cmd)
 			printf("\n[ERROR]: httpServer_execDroneCmd - Drone Command UNKNOW\n");
 		}
 	}
+}
+
+bool httpServer_isServerOk()
+{
+	return httpServer_ok;
 }
