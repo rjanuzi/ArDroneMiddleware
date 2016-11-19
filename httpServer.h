@@ -20,7 +20,7 @@
 
 #include <droneTMs.h>
 
-#define HTTP_SERVER_PORT		5000
+#define HTTP_SERVER_PORT		5001
 #define HTTP_PAGE_FILE_MAX_LEN	4096
 
 #define HTTP_SERVER_TM_URL		"/ardroneMiddleware/tm"

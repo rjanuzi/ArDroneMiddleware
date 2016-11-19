@@ -1,3 +1,4 @@
+
 /**
  * \file
  *
@@ -61,11 +62,6 @@ void* httpServer_serverThread(void *arg)
 	return NULL;
 }
 
-/**********************************************************************/
-/* A request has caused a call to accept() on the server port to
- * return.  Process the request appropriately.
- * Parameters: the socket connected to the client */
-/**********************************************************************/
 void accept_request(int client)
 {
 	char buf[1024];
@@ -90,7 +86,7 @@ void accept_request(int client)
 	}
 	method[i] = '\0';
 
-	/* Nesse momento estamos apenas considerando GETs */
+	/* Verifica se foi um GET */
 	if(strcasecmp(method, "GET") == 0)
 	{
 		i = 0;
@@ -182,44 +178,7 @@ void accept_request(int client)
 		}
 	}
 
-	//	if (strcasecmp(method, "GET") == 0)
-	//	{
-	//		query_string = url;
-	//		while ((*query_string != '?') && (*query_string != '\0'))
-	//			query_string++;
-	//		if (*query_string == '?')
-	//		{
-	//			cgi = 1;
-	//			*query_string = '\0';
-	//			query_string++;
-	//		}
-	//		else
-	//		{
-	//			not_found(client);
-	//		}
-	//	}
-	//
-	//	sprintf(path, "htdocs%s", url);
-	//	if (path[strlen(path) - 1] == '/')
-	//		strcat(path, "index.html");
-	//	if (stat(path, &st) == -1) {
-	//		while ((numchars > 0) && strcmp("\n", buf))  /* read & discard headers */
-	//			numchars = get_line(client, buf, sizeof(buf));
-	//		not_found(client);
-	//	}
-	//	else
-	//	{
-	//		if ((st.st_mode & S_IFMT) == S_IFDIR)
-	//			strcat(path, "/index.html");
-	//		if ((st.st_mode & S_IXUSR) ||
-	//				(st.st_mode & S_IXGRP) ||
-	//				(st.st_mode & S_IXOTH)    )
-	//			cgi = 1;
-	//		if (!cgi)
-	//			serve_file(client, path);
-	//		else
-	//			execute_cgi(client, path, method, query_string);
-	//	}
+	sleep(5);
 
 	close(client);
 }
