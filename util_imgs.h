@@ -9,6 +9,12 @@
 
 #define UTIL_IMGS_MEMO_BLOCK_SIZE	65536 /* Bytes */
 
+#define UTIL_IMGS_IMG_MOCKED_1_PATH	"imgs/1.jpg"
+#define UTIL_IMGS_IMG_MOCKED_2_PATH	"imgs/2.jpg"
+#define UTIL_IMGS_IMG_MOCKED_3_PATH	"imgs/3.jpg"
+#define UTIL_IMGS_IMG_MOCKED_4_PATH	"imgs/4.jpg"
+#define UTIL_IMGS_IMG_MOCKED_5_PATH	"imgs/droneMockedImg.jpg"
+
 /**
  * @date 09/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
