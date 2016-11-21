@@ -2,7 +2,6 @@
 
 volatile static droneTms_threads_t droneTms_threads;
 volatile static uint8_t droneTms_comWdt = DRONE_TMS_WDT_RESET_VAL;
-volatile static uint32_t droneTms_seqNbr = 1;
 volatile static droneTms_navdataFrame_t droneTms_lastNavdataFrame;
 
 /* TM and Photo DataPoll */
@@ -35,9 +34,9 @@ void* droneTms_tmReceiverThread(void *arg)
 	memset((void*) buf, 0, (size_t) UTIL_UDP_BUFFLEN);
 	buf[0] = 0x01;
 
-	ATCMD_CREATE_AT_SET_NAVDATA_DEMO_MODE(cmd, droneTms_seqNbr++);
+	ATCMD_CREATE_AT_SET_NAVDATA_DEMO_MODE(cmd, droneTcs_getNextSeqNmbr());
 	droneTcs_sendAtCmd(cmd);
-	ATCMD_CREATE_AT_FLAT_TRIM(cmd, droneTms_seqNbr++);
+	ATCMD_CREATE_AT_FLAT_TRIM(cmd, droneTcs_getNextSeqNmbr());
 	droneTcs_sendAtCmd(cmd);
 
 	utilUdp_sendUdpMsg(buf, 4, DRONE_IP, DRONE_VIDEO_STREAM_PORT, DRONE_VIDEO_STREAM_PORT);
@@ -73,7 +72,7 @@ void* droneTms_comKeepAlive(void *arg)
 	while( true )
 	{
 		droneTms_comWdt = DRONE_TMS_WDT_RESET_VAL;
-		ATCMD_CREATE_AT_COM_WDT(cmd, droneTms_seqNbr++);
+		ATCMD_CREATE_AT_COM_WDT(cmd, droneTcs_getNextSeqNmbr());
 		droneTcs_sendAtCmd(cmd);
 
 		usleep(DRONE_TMS_COM_KEEP_ALIVE_THREAD_DELAY_US); /* Se nao houver trafego em mais de 50 ms 2 segundos o drone corta a comunicacao */

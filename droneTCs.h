@@ -56,4 +56,12 @@ droneTcs_threads droneTcs_getThreadsIds();
  */
 bool droneTcs_sendAtCmd(const char* cmd);
 
+/**
+ * @date 21/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * TODO
+ */
+uint32_t droneTcs_getNextSeqNmbr();
+
 #endif /* DRONETCS_H_ */

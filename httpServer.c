@@ -66,7 +66,6 @@ void* httpServer_serverThread(void *arg)
 			goto errStops;
 		}
 
-		/* accept_request(client_sock); */
 		if (pthread_create(&newthread ,(volatile const pthread_attr_t* ) NULL, accept_request, client_sock) != 0)
 			perror("pthread_create");
 	}
@@ -684,10 +683,11 @@ bool httpServer_strStartsWith(const char* pre, const char* str)
 	return strncmp(pre, str, strlen(pre)) == 0;
 }
 
-void httpServer_getCmdParamVal(const char* valOut, const char* cmdParam)
+void httpServer_getCmdParamVal(char* valOut, const char* cmdParam)
 {
 	int i;
-	sprintf(valOut, "");
+
+	valOut[0] = '\0';
 
 	for(i = 0; i < strlen(cmdParam); i++)
 	{
@@ -704,22 +704,32 @@ void httpServer_getCmdParamVal(const char* valOut, const char* cmdParam)
 
 void httpServer_execDroneCmd(const char* cmd)
 {
+	char atCmd[50];
+	int i;
+
 	if(strcmp(cmd, HTTP_SERVER_CMD_TAKEOFF) == 0)
 	{
-		//TODO - Executar comando
-		printf("\nTaking off...\n");
+		printf("\n[LOG]: httpServer_execDroneCmd - Taking off...\n");
+		for(i = 0; i < 10; i++)
+		{
+			ATCMD_CREATE_AT_REF_CMD(atCmd, droneTcs_getNextSeqNmbr(), ATCMD_AT_REF_FIXED_BITS | ATCMD_AT_REF_TAKE_OF_FLAG);
+			droneTcs_sendAtCmd(atCmd);
+		}
 	}
 	else
 	{
 		if(strcmp(cmd, HTTP_SERVER_CMD_LAND) == 0)
 		{
-			//TODO - Executar comando
-			printf("\nLanding...\n");
+			printf("\n[LOG]: httpServer_execDroneCmd - Landing...\n");
+			for(i = 0; i < 10; i++)
+			{
+				ATCMD_CREATE_AT_REF_CMD(atCmd, droneTcs_getNextSeqNmbr(), ATCMD_AT_REF_FIXED_BITS | ATCMD_AT_REF_LAND_FLAG);
+				droneTcs_sendAtCmd(atCmd);
+			}
 		}
 		else
 		{
 			//if()...
-
 			printf("\n[ERROR]: httpServer_execDroneCmd - Drone Command UNKNOW\n");
 		}
 	}

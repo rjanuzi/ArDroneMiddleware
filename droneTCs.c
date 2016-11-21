@@ -2,6 +2,8 @@
 
 static droneTcs_threads threads;
 
+volatile static uint32_t droneTcs_seqNbr = 1;
+
 void* droneTcs_tcRespReceiverThread(void *arg)
 {
 	static struct sockaddr_in si_me, si_other;
@@ -72,4 +74,11 @@ bool droneTcs_sendAtCmd(const char* cmd)
 		return false;
 
 	return true;
+}
+
+uint32_t droneTcs_getNextSeqNmbr()
+{
+	uint32_t aux = droneTcs_seqNbr++;
+
+	return aux;
 }

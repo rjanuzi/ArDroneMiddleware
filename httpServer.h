@@ -19,6 +19,7 @@
 #include <stdlib.h>
 
 #include <droneTMs.h>
+#include <droneTCs.h>
 
 #define HTTP_SERVER_PORT		5001
 #define HTTP_PAGE_FILE_MAX_LEN	4096
@@ -71,7 +72,7 @@ void httpServer_sendPhotoData(int client);
  * @date 14/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * TODOwhile
  */
 void httpServer_headersJPG(int client, uint16_t imgLenBytes);
 
@@ -82,6 +83,14 @@ void httpServer_headersJPG(int client, uint16_t imgLenBytes);
  * TODO
  */
 void httpServer_sendCmdTestPage(int client, const char* pageFile);
+
+/**
+ * @date 16/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * TODO
+ */
+void httpServer_sendPage(int client, const char* pageFile);
 
 /**
  * @date 16/11/2016
@@ -105,7 +114,7 @@ bool httpServer_strStartsWith(const char* pre, const char* str);
  *
  * TODO
  */
-void httpServer_getCmdParamVal(const char* valOut, const char* cmdParam);
+void httpServer_getCmdParamVal(char* valOut, const char* cmdParam);
 
 /**
  * @date 16/11/2016
