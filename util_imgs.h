@@ -13,7 +13,8 @@
 #define UTIL_IMGS_IMG_MOCKED_2_PATH	"imgs/2.jpg"
 #define UTIL_IMGS_IMG_MOCKED_3_PATH	"imgs/3.jpg"
 #define UTIL_IMGS_IMG_MOCKED_4_PATH	"imgs/4.jpg"
-#define UTIL_IMGS_IMG_MOCKED_5_PATH	"imgs/droneMockedImg.jpg"
+#define UTIL_IMGS_IMG_MOCKED_5_PATH	"imgs/5.jpg"
+#define UTIL_IMGS_IMG_MOCKED_6_PATH	"imgs/droneMockedImg.jpg"
 
 /**
  * @date 09/11/2016

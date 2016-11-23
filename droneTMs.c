@@ -158,13 +158,17 @@ uint32_t droneTms_getPhoto(uint8_t* photoDataOut)
 		case 3:
 		droneTms_lastImgDataLen = utilImgs_getImgBin(UTIL_IMGS_IMG_MOCKED_4_PATH, droneTms_lastImgData);
 		break;
+		
+		case 4:
+		droneTms_lastImgDataLen = utilImgs_getImgBin(UTIL_IMGS_IMG_MOCKED_5_PATH, droneTms_lastImgData);
+		break;
 
 		default:
-		droneTms_lastImgDataLen = utilImgs_getImgBin(UTIL_IMGS_IMG_MOCKED_5_PATH, droneTms_lastImgData);
+		droneTms_lastImgDataLen = utilImgs_getImgBin(UTIL_IMGS_IMG_MOCKED_6_PATH, droneTms_lastImgData);
 		break;
 	}
 
-	photoNmbr = ((photoNmbr+1)%4);
+	photoNmbr = ((photoNmbr+1)%5);
 #endif
 
 	memset(photoDataOut, 0, DRONE_PHOTO_MAX_LEN);
