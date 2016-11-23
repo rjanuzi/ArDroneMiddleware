@@ -22,7 +22,7 @@ volatile static droneTms_tmData_t droneTms_lastTmData =
 };
 
 uint8_t droneTms_lastImgData[DRONE_PHOTO_MAX_LEN];
-uint16_t droneTms_lastImgDataLen = 0;
+uint32_t droneTms_lastImgDataLen = 0;
 
 void* droneTms_tmReceiverThread(void *arg)
 {
@@ -136,7 +136,7 @@ droneTms_tmData_t droneTms_getTmData()
 	return droneTms_lastTmData;
 }
 
-uint16_t droneTms_getPhoto(uint8_t* photoDataOut)
+uint32_t droneTms_getPhoto(uint8_t* photoDataOut)
 {
 #if(DRONE_TMS_MOCKED_PHOTO)
 	static uint8_t photoNmbr = 0;
@@ -146,24 +146,24 @@ uint16_t droneTms_getPhoto(uint8_t* photoDataOut)
 		case 0:
 		droneTms_lastImgDataLen = utilImgs_getImgBin(UTIL_IMGS_IMG_MOCKED_1_PATH, droneTms_lastImgData);
 		break;
-		
+
 		case 1:
 		droneTms_lastImgDataLen = utilImgs_getImgBin(UTIL_IMGS_IMG_MOCKED_2_PATH, droneTms_lastImgData);
 		break;
-		
+
 		case 2:
 		droneTms_lastImgDataLen = utilImgs_getImgBin(UTIL_IMGS_IMG_MOCKED_3_PATH, droneTms_lastImgData);
 		break;
-		
+
 		case 3:
 		droneTms_lastImgDataLen = utilImgs_getImgBin(UTIL_IMGS_IMG_MOCKED_4_PATH, droneTms_lastImgData);
 		break;
-		
+
 		default:
 		droneTms_lastImgDataLen = utilImgs_getImgBin(UTIL_IMGS_IMG_MOCKED_5_PATH, droneTms_lastImgData);
 		break;
 	}
-	
+
 	photoNmbr = ((photoNmbr+1)%4);
 #endif
 
@@ -176,7 +176,7 @@ uint16_t droneTms_getPhoto(uint8_t* photoDataOut)
 void droneTms_hexDump(uint8_t* buf, uint16_t len)
 {
 	uint16_t i;
-	
+
 	printf("\nHex Dump: ");
 	for(i = 0; i < len; i++)
 		printf(" 0x%x ", buf[i]);
@@ -213,7 +213,6 @@ void droneTms_printNavdataDemo(droneTms_navdataDemo_t demo)
 
 void droneTms_printNavdataCks(droneTms_navdataCks_t cks)
 {
-
 	printf("\n\tChecksum: ");
 	printf("\n\t\tId: 0x%x", cks.id);
 	printf("\n\t\tSize: %d", cks.size);

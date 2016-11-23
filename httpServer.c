@@ -508,14 +508,14 @@ void httpServer_sendTms(int client)
 
 void httpServer_sendPhotoData(int client)
 {
-	uint16_t numBytes = -1;
+	uint32_t numBytes = -1;
 	uint8_t imgBinData[DRONE_PHOTO_MAX_LEN];
 
 	numBytes = droneTms_getPhoto(imgBinData);
 
 	if(numBytes < 0)
 	{
-		printf("[ERROR]: httpServer_sendPhotoData - Fail reading the image bytes.");
+		printf("\n[ERROR]: httpServer_sendPhotoData - Fail reading the image bytes.\n");
 		not_found(client);
 		return;
 	}
@@ -524,7 +524,7 @@ void httpServer_sendPhotoData(int client)
 	send(client, (void*) imgBinData, (size_t) numBytes, 0);
 }
 
-void httpServer_headersJPG(int client, uint16_t imgLenBytes)
+void httpServer_headersJPG(int client, uint32_t imgLenBytes)
 {
 	char buf[1024];
 

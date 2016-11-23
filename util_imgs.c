@@ -36,14 +36,15 @@ bool utilImgs_getHexString(const char* imgFilePath, char* strOut)
 	return true;
 }
 
-int utilImgs_getImgBin(const char* imgFilePath, uint8_t* outArray)
+uint32_t utilImgs_getImgBin(const char* imgFilePath, uint8_t* outArray)
 {
 	FILE* imgFile = fopen(imgFilePath, "r");
-	uint16_t lenReaded;
-	int index = 0;
+	uint32_t lenReaded;
+	uint32_t index = 0;
 
 	if(imgFile == NULL)
 	{
+		printf("\n[ERROR]: utilImgs_getImgBin - Fail reading the file %s.\n", imgFilePath);
 		return -1;
 	}
 

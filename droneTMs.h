@@ -30,12 +30,12 @@
 
 /* General defines */
 #define DRONE_TMS_COM_KEEP_ALIVE_THREAD_DELAY_US	50000
-#define DRONE_TMS_WDT_RESET_VAL						10
-#define DRONE_PHOTO_MAX_LEN							5000000
+#define DRONE_TMS_WDT_RESET_VAL				10
+#define DRONE_PHOTO_MAX_LEN				5000000
 
-#define DRONE_TMS_VERBOSE							1
-#define DRONE_TMS_MOCKED_TM							1
-#define DRONE_TMS_MOCKED_PHOTO						1
+#define DRONE_TMS_VERBOSE				1
+#define DRONE_TMS_MOCKED_TM				1
+#define DRONE_TMS_MOCKED_PHOTO				1
 
 typedef float float32_t;
 
@@ -157,7 +157,7 @@ droneTms_tmData_t droneTms_getTmData();
  *
  * TODO
  */
-uint16_t droneTms_getPhoto(uint8_t* photoDataOut);
+uint32_t droneTms_getPhoto(uint8_t* photoDataOut);
 
 /**
  * @date 15/11/2016

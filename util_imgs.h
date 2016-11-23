@@ -29,7 +29,7 @@ bool utilImgs_getHexString(const char* imgFilePath, char* strOut);
  *
  * TODO
  */
-int utilImgs_getImgBin(const char* imgFilePath, uint8_t* outArray);
+uint32_t utilImgs_getImgBin(const char* imgFilePath, uint8_t* outArray);
 
 /**
  * @date 14/11/2016

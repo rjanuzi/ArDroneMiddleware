@@ -72,9 +72,9 @@ void httpServer_sendPhotoData(int client);
  * @date 14/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODOwhile
+ * TODO
  */
-void httpServer_headersJPG(int client, uint16_t imgLenBytes);
+void httpServer_headersJPG(int client, uint32_t imgLenBytes);
 
 /**
  * @date 16/11/2016
