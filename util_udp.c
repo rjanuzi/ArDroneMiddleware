@@ -1,3 +1,14 @@
+/**
+ * \file
+ *
+ * Este arquivo, juntamente com o seu .h relacionado, possui funcionalidades
+ * utilitarias para se trabalhar com os arquivos de imagens disponiveis
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 06/11/2016
+ *
+ */
+
 #include <util_udp.h>
 
 bool utilUdp_sendUdpMsg(const uint8_t* msg, uint16_t len, const char* hostIp, int destPort, int srcPort)

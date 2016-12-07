@@ -1,8 +1,11 @@
-/*
- * atCommands.h
+/**
+ * \file
  *
- *  Created on: 6 de nov de 2016
- *      Author: rafael
+ * Este arquivo contem definicoes de constantes e macros para facilitar a 
+ * criacao de comandos AT aceitados pelo Drone.
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 06/11/2016
  */
 
 #ifndef DRONEATCOMMANDS_H_

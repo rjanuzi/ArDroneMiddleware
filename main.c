@@ -1,3 +1,14 @@
+/**
+ * \file
+ *
+ * Este arquivo, juntamente com o seu .h relacionado, representam o ponto de entrada
+ * do programa (funcao main).
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 14/11/2016
+ *
+ */
+
 #include <main.h>
 
 int main(int argc, char** argv)

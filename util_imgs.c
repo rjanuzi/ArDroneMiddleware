@@ -1,3 +1,14 @@
+/**
+ * \file
+ *
+ * Este arquivo, juntamente com o seu .h relacionado, possui funcionalidades
+ * utilitarias para se trabalhar com os arquivos de imagens disponiveis
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 09/11/2016
+ *
+ */
+
 #include <util_imgs.h>
 
 bool utilImgs_getHexString(const char* imgFilePath, char* strOut)

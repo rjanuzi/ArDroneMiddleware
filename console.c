@@ -1,3 +1,14 @@
+/**
+ * \file
+ *
+ * Este arquivo, juntamente com o seu .h relacionado, reune funcionalidades simples para 
+ * recepcao de comandos para teste utilizando o console.
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 16/11/2016
+ *
+ */
+
 #include <droneTMs.h>
 
 static volatile pthread_t console_inputReceiver;

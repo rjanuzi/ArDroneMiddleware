@@ -1,3 +1,13 @@
+/**
+ * \file
+ *
+ * Este arquivo, juntamente com o seu relacionado .h, reune funcionalidades relacionadas
+ * com o envio de telecomandos para o Drone.
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 16/11/2016
+ */
+
 #include "droneTCs.h"
 
 static droneTcs_threads threads;

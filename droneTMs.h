@@ -1,3 +1,11 @@
+/**
+ * \file
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 14/11/2016
+ *
+ */
+
 #ifndef DRONETMS_H_
 #define DRONETMS_H_
 
@@ -30,12 +38,12 @@
 
 /* General defines */
 #define DRONE_TMS_COM_KEEP_ALIVE_THREAD_DELAY_US	50000
-#define DRONE_TMS_WDT_RESET_VAL				10
-#define DRONE_PHOTO_MAX_LEN				5000000
+#define DRONE_TMS_WDT_RESET_VAL						10
+#define DRONE_PHOTO_MAX_LEN							5000000
 
 #define DRONE_TMS_VERBOSE				1
 #define DRONE_TMS_MOCKED_TM				1
-#define DRONE_TMS_MOCKED_PHOTO				1
+#define DRONE_TMS_MOCKED_PHOTO			1
 
 typedef float float32_t;
 
@@ -131,7 +139,30 @@ typedef struct __attribute__((packed)) {
  * @date 06/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Thread para a recepcao e decodificacao parcial dos frames de telemetria
+ * enviados pelo Drone.
+ *
+ * @param arg: Nao utilizado. Mantido apenas por padronizacao de Threads.
+ */
+void* droneTms_tmReceiverThread(void *arg);
+
+/**
+ * @date 06/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * Thread para manter a conexao de telemetrias com o Drone ativa, enviando o comando para 
+ * resetar o Watchdog do Drone a cada 50 ms.
+ *
+ * @param arg: Nao utilizado. Mantido apenas por padronizacao de Threads.
+ */
+void* droneTms_comKeepAlive(void *arg);
+
+/**
+ * @date 06/11/2016
+ * @autho Rafael B. Januzi (rjanuzi@gmail.com)
+ *
+ * Inicializa o modulo de recepcao de telemetrias do Drone. Basicamente cria as
+ * threads do modulo.
  */
 bool droneTms_init();
 
@@ -139,7 +170,9 @@ bool droneTms_init();
  * @date 06/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Recupera os handles das Threads do modulo.
+ *
+ * @return Estrutura de dados contendo os handles das threads do modulo.
  */
 droneTms_threads_t droneTms_getThreadsIds();
 
@@ -147,7 +180,9 @@ droneTms_threads_t droneTms_getThreadsIds();
  * @date 14/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Recupera a ultima versao dos dados basicos de telemetria recebidos do Drone.
+ *
+ * @return Estrutura de dados com as ultimas telemetrias basicas recebidas.
  */
 droneTms_tmData_t droneTms_getTmData();
 
@@ -155,7 +190,13 @@ droneTms_tmData_t droneTms_getTmData();
  * @date 14/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Recupera a ultima imagem disponivel da camera do Drone.
+ * Obs.: Nessa versao a imagem nao eh de fato recebida do Drone, e sim
+ * sao utilizadas imagens "mockadas".
+ *
+ * @param [out] photoDataOut: Array de bytes onde devem ser armazenados os bytes da imagem.
+ *
+ * @return Quantidade de bytes armazenados no array de saida.
  */
 uint32_t droneTms_getPhoto(uint8_t* photoDataOut);
 
@@ -163,7 +204,10 @@ uint32_t droneTms_getPhoto(uint8_t* photoDataOut);
  * @date 15/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Funcao para imprimir no terminal os hexadecimais a partir de um endereco na memoria.
+ *
+ * @param buf: Ponteiro para endereco inicial da memoria.
+ * @param len: Numero de bytes para imprimir.
  */
 void droneTms_hexDump(uint8_t* buf, uint16_t len);
 
@@ -171,7 +215,9 @@ void droneTms_hexDump(uint8_t* buf, uint16_t len);
  * @date 15/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Funcao auxiliar para imprimir frames de telemetrias decodificadas.
+ *
+ * @param frame: Frame de telemetrias para imprimir no terminal.
  */
 void droneTms_printNavdataFrame(droneTms_navdataFrame_t frame);
 
@@ -179,7 +225,9 @@ void droneTms_printNavdataFrame(droneTms_navdataFrame_t frame);
  * @date 15/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Funcao auxiliar para imprimir frames de telemetrias decodificadas.
+ *
+ * @param demo: Frame de telemetrias para imprimir no terminal.
  */
 void droneTms_printNavdataDemo(droneTms_navdataDemo_t demo);
 
@@ -187,7 +235,9 @@ void droneTms_printNavdataDemo(droneTms_navdataDemo_t demo);
  * @date 15/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Funcao auxiliar para imprimir frames de telemetrias decodificadas.
+ *
+ * @param cks: Frame de telemetrias para imprimir no terminal.
  */
 void droneTms_printNavdataCks(droneTms_navdataCks_t cks);
 

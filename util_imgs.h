@@ -1,3 +1,11 @@
+/**
+ * \file
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 09/11/2016
+ *
+ */
+
 #ifndef UTIL_IMGS_H_
 #define UTIL_IMGS_H_
 
@@ -20,15 +28,25 @@
  * @date 09/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Recupera os bytes (em hexadecimais) de uma imagem salva em arquivo para um array.
+ *
+ * @param imgFilePath: String contendo o caminho ateh o arquivo de imagem.
+ * @param [out] strOut: String de hexadecimais recuperados do arquivo (AABBCC, onde AA & BB & CC sao caracteres em hex)
+ *
+ * @return true caso a recuperacao tenha ocorrido com sucesso e false caso contrario.
  */
 bool utilImgs_getHexString(const char* imgFilePath, char* strOut);
 
 /**
- * @date 14/11/2016
+ * @date 014/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Recupera os bytes de uma imagem salva em arquivo para um array.
+ *
+ * @param imgFilePath: String contendo o caminho ateh o arquivo de imagem.
+ * @param [out] outArray: Array de bytes com os valores obtidos do arquivo de imagem.
+ *
+ * @return Numero de bytes recuperados do arquivo.
  */
 uint32_t utilImgs_getImgBin(const char* imgFilePath, uint8_t* outArray);
 
@@ -36,7 +54,12 @@ uint32_t utilImgs_getImgBin(const char* imgFilePath, uint8_t* outArray);
  * @date 14/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Salva um arquivo binario utilizando uma String de hexadecimais como entrada.
+ *
+ * @param hexString: String de hexadecimais para para criacao do arquivo em binario.
+ * @param filePath: String com o caminho ateh o arquivo a ser criado.
+ *
+ * @return true caso o salvamento tenha acontecido corretamente e false caso contrario.
  */
 bool utilImgs_hexToFile(const char* hexString, char* filePath);
 
@@ -44,7 +67,11 @@ bool utilImgs_hexToFile(const char* hexString, char* filePath);
  * @date 14/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Converte uma String em hexadecimal (1 Byte) para o seu valor real.
+ *
+ * @param hexByteString: String hexadecimal contendo 1 Byte.
+ *
+ * @return Valor do byte em hexadecimal passado por parametro.
  */
 uint8_t utilImgs_hexToByte(const char* hexByteString);
 
@@ -52,7 +79,11 @@ uint8_t utilImgs_hexToByte(const char* hexByteString);
  * @date 14/11/2016
  * @autho Rafael B. Januzi (rjanuzi@gmail.com)
  *
- * TODO
+ * Converte um caracter hexadecimal (4 bits) para seu valor real.
+ *
+ * @param hexChar: Caracter representando 4 bits em hexadecimal.
+ *
+ * @return Valor dos 4 bits convertidos de um caracter hexadecimal.
  */
 uint8_t utilImg_getHexCharVal(char hexChar);
 

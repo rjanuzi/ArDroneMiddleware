@@ -1,3 +1,10 @@
+/**
+ * \file
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 14/11/2016
+ */
+
 #ifndef MAIN_H_
 #define MAIN_H_
 

@@ -1,10 +1,13 @@
-
 /**
  * \file
  *
  * Este arquivo (jutamente com o seu respectivo httpd.h) foi derivado do HTTP Server
  * (tinyhttpd: \ref http://tinyhttpd.sourceforge.net/) e deve ser utilizado apenas para
  * propositos academicos, uma vez que nao eh um programa de producao.
+ *
+ * As funcoes implementadas nesses arquivos contemplam as funcionaldiades de um simples 
+ * servidor HTTP, utilizado para responder com telemetrias e imagens do Drone e por 
+ * receber telecomandos.
  *
  * @author Rafael B. Januzi (rjanuzi@gmail.com)
  * @date 07/11/2016

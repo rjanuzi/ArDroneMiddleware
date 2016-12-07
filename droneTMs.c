@@ -1,3 +1,15 @@
+/**
+ * \file
+ *
+ * Este arquivo, juntamente com o seu .h relacionado, reune funcionalidades para recepcao 
+ * de telemetrias enviadas pelo Drone, apresentando algumas conversoes e decodificacoes de 
+ * valores.
+ *
+ * @author Rafael B. Januzi (rjanuzi@gmail.com)
+ * @date 14/11/2016
+ *
+ */
+
 #include <droneTMs.h>
 
 volatile static droneTms_threads_t droneTms_threads;
